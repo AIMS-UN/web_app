@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+docker exec -i ng-container sh -c "cd aims_wa && npm run lint"
+docker exec -i ng-container sh -c "cd aims_wa && npm test"
