@@ -11,9 +11,17 @@ import { AppMaterialModule } from './app.material.module';
 
 import { ExampleComponent } from './components/example/example.component';
 import { Example2Component } from './components/example2/example2.component';
+import { LoginPageComponent } from './components/loginPage/loginPage.component';
+import { RegisterPageComponent } from './components/registerPage/registerPage.component';
 
 @NgModule({
-    declarations: [AppComponent, ExampleComponent, Example2Component],
+    declarations: [
+        AppComponent,
+        ExampleComponent,
+        Example2Component,
+        LoginPageComponent,
+        RegisterPageComponent,
+    ],
     imports: [
         BrowserModule,
         FormsModule,
