@@ -1,0 +1,23 @@
+query GetEnrollmentsByFilters($semester: String, $group: String, $subject: String) {
+  getEnrollmentsByFilters(semester: $semester, group: $group, subject: $subject) {
+    id
+    user
+    group
+    subject
+    semester
+    finalGrade
+  }
+}
+
+query GetEnrollmentById($id: String!) {
+  getEnrollmentById(id: $id) {
+    id
+    user
+    group
+    subject
+    semester
+    finalGrade
+  }
+}
+
+

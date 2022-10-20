@@ -1,0 +1,9 @@
+query MyAccount {
+  myAccount {
+    id
+    username
+    role
+    updatedAt
+    createdAt
+  }
+}

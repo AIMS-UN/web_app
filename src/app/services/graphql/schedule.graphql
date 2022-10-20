@@ -1,0 +1,22 @@
+query GetSchedule($userId: String!) {
+  getSchedule(userId: $userId) {
+    id
+    user
+    group
+    subject
+    semester
+    finalGrade
+  }
+}
+
+query GetScheduleBySemester($semester: String!, $userId: String!) {
+  getScheduleBySemester(semester: $semester, userId: $userId) {
+    id
+    user
+    group
+    subject
+    semester
+    finalGrade
+  }
+}
+

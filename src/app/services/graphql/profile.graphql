@@ -1,0 +1,39 @@
+query GetProfiles {
+  getProfiles {
+    user_id
+    name
+    lastname
+    email
+    birthdate
+    phone_number
+    address
+    historials {
+      coursed_credits
+      approved_credits
+      reprobed_credits
+      GPA
+      enrollment_id
+      career
+    }
+  }
+}
+
+query GetProfilesById($userId: String!) {
+  getProfilesById(user_id: $userId) {
+    user_id
+    name
+    lastname
+    email
+    birthdate
+    phone_number
+    address
+    historials {
+      coursed_credits
+      approved_credits
+      reprobed_credits
+      GPA
+      enrollment_id
+      career
+    }
+  }
+}

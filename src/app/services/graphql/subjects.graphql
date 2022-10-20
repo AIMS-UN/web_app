@@ -1,0 +1,33 @@
+query GetSubjectbyName($name: String!) {
+  getSubjectbyName(name: $name) {
+    subject_id
+    name
+    curriculum
+    credits
+    code
+    career
+  }
+}
+
+query GetSubjectbyCode($code: Float!) {
+  getSubjectbyCode(code: $code) {
+    subject_id
+    name
+    curriculum
+    credits
+    code
+    career
+  }
+}
+
+query GetSubjectbyCareer($career: Float!) {
+  getSubjectbyCareer(career: $career) {
+    subject_id
+    name
+    curriculum
+    credits
+    code
+    career
+  }
+}
+

@@ -1,0 +1,37 @@
+query GetGradingCategories {
+  getGradingCategories {
+    id
+    name
+    weight
+    group_id
+    subject_id
+  }
+}
+
+query GetGradingCategory($id: String!) {
+  getGradingCategory(id: $id) {
+    id
+    name
+    weight
+    group_id
+    subject_id
+  }
+}
+
+query GetGrades {
+  getGrades {
+    id
+    category_id
+    student_id
+    score
+  }
+}
+
+query GetGradeById($getGradeByIdId: String!) {
+  getGradeById(id: $getGradeByIdId) {
+    id
+    category_id
+    student_id
+    score
+  }
+}
