@@ -27,16 +27,16 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@apollo/client": "^3.0.0",
     "apollo-angular": "^4.1.0",
     "bootstrap": "^5.2.2",
+    "graphql": "^16",
     "jquery": "^3.6.1",
     "module-alias": "^2.2.2",
     "popper.js": "^1.16.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "@apollo/client": "^3.0.0",
-    "graphql": "^16"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.6",
@@ -49,6 +49,7 @@
     "@angular/compiler-cli": "^14.2.0",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@graphql-codegen/typescript-apollo-angular": "^3.5.4",
     "@types/jasmine": "~4.0.0",
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",
