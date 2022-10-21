@@ -14,7 +14,10 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["npm run lint", "npm run format"]
+    "*.{js,jsx,ts,tsx}": [
+      "npm run lint",
+      "npm run format"
+    ]
   },
   "license": "GPL-3.0",
   "homepage": "https://github.com/sarodriguezva/aims_web_app#readme",
@@ -33,7 +36,7 @@
     "@apollo/client": "^3.0.0",
     "apollo-angular": "^4.1.0",
     "bootstrap": "^5.2.2",
-    "graphql": "^16",
+    "graphql": "^16.6.0",
     "jquery": "^3.6.1",
     "module-alias": "^2.2.2",
     "popper.js": "^1.16.1",
@@ -52,7 +55,10 @@
     "@angular/compiler-cli": "^14.2.0",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
-    "@graphql-codegen/typescript-apollo-angular": "^3.5.4",
+    "@graphql-codegen/cli": "^2.13.7",
+    "@graphql-codegen/typescript": "^2.7.5",
+    "@graphql-codegen/typescript-apollo-angular": "^3.5.5",
+    "@graphql-codegen/typescript-operations": "^2.5.5",
     "@types/jasmine": "~4.0.0",
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",
