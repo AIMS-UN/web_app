@@ -9,7 +9,7 @@ query GetSubjectbyName($name: String!) {
   }
 }
 
-query GetSubjectbyCode($code: Float!) {
+query GetSubjectbyCode($code: String!) {
   getSubjectbyCode(code: $code) {
     subject_id
     name
@@ -30,4 +30,3 @@ query GetSubjectbyCareer($career: Float!) {
     career
   }
 }
-

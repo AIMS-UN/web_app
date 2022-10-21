@@ -19,5 +19,3 @@ query GetEnrollmentById($id: String!) {
     finalGrade
   }
 }
-
-

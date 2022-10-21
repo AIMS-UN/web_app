@@ -1,0 +1,75 @@
+query GetGroupById($classGroupId: String!) {
+  getGroupById(classGroupId: $classGroupId) {
+    classGroupId
+    max_capacity
+    teacher_id
+  }
+}
+
+query GetFacultybyName($name: String!) {
+  getFacultybyName(name: $name) {
+    facultyId
+    name
+  }
+}
+
+query GetDepartmentbyName($name: String!) {
+  getDepartmentbyName(name: $name) {
+    departmentId
+    name
+    faculties {
+      facultyId
+      name
+    }
+  }
+}
+
+query GetCareerbyName($name: String!) {
+  getCareerbyName(name: $name) {
+    careerId
+    name
+    credits
+    departments {
+      departmentId
+      name
+      faculties {
+        facultyId
+        name
+      }
+    }
+  }
+}
+
+query GetCareerById($careerId: Float!) {
+  getCareerById(careerId: $careerId) {
+    careerId
+    name
+    credits
+    departments {
+      departmentId
+      name
+      faculties {
+        facultyId
+        name
+      }
+    }
+  }
+}
+
+query GetDepartmentById($departmentId: Float!) {
+  getDepartmentById(departmentId: $departmentId) {
+    departmentId
+    name
+    faculties {
+      facultyId
+      name
+    }
+  }
+}
+
+query GetFacultyById($facultyId: Float!) {
+  getFacultyById(facultyId: $facultyId) {
+    facultyId
+    name
+  }
+}

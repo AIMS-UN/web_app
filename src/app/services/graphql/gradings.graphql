@@ -1,10 +1,10 @@
-query GetGradingCategories {
-  getGradingCategories {
+query GetGradingCategories($subjectCode: String, $groupId: String) {
+  getGradingCategories(subject_code: $subjectCode, group_id: $groupId) {
     id
     name
     weight
     group_id
-    subject_id
+    subject_code
   }
 }
 
@@ -14,12 +14,12 @@ query GetGradingCategory($id: String!) {
     name
     weight
     group_id
-    subject_id
+    subject_code
   }
 }
 
-query GetGrades {
-  getGrades {
+query GetGrades($studentId: String, $categoryId: String) {
+  getGrades(student_id: $studentId, category_id: $categoryId) {
     id
     category_id
     student_id
@@ -27,8 +27,8 @@ query GetGrades {
   }
 }
 
-query GetGradeById($getGradeByIdId: String!) {
-  getGradeById(id: $getGradeByIdId) {
+query GetGrade($id: String!) {
+  getGrade(id: $id) {
     id
     category_id
     student_id

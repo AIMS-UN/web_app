@@ -21,18 +21,47 @@ export type Scalars = {
     Float: number;
 };
 
+export type Careers = {
+    __typename?: 'Careers';
+    careerId: Scalars['Float'];
+    credits: Scalars['String'];
+    departments: Departments;
+    name: Scalars['String'];
+};
+
 export type Category = {
     __typename?: 'Category';
     group_id: Scalars['String'];
     id: Scalars['String'];
     name: Scalars['String'];
-    subject_id: Scalars['String'];
+    subject_code: Scalars['String'];
     weight: Scalars['Float'];
+};
+
+export type CategoryInput = {
+    group_id: Scalars['String'];
+    name: Scalars['String'];
+    subject_code: Scalars['String'];
+    weight: Scalars['Float'];
+};
+
+export type ClassGroups = {
+    __typename?: 'ClassGroups';
+    classGroupId: Scalars['String'];
+    max_capacity: Scalars['Float'];
+    teacher_id: Scalars['String'];
 };
 
 export type Data = {
     __typename?: 'Data';
     message?: Maybe<Scalars['String']>;
+    name: Scalars['String'];
+};
+
+export type Departments = {
+    __typename?: 'Departments';
+    departmentId: Scalars['Float'];
+    faculties: Faculties;
     name: Scalars['String'];
 };
 
@@ -46,10 +75,22 @@ export type Enrollment = {
     user: Scalars['String'];
 };
 
+export type Faculties = {
+    __typename?: 'Faculties';
+    facultyId: Scalars['Float'];
+    name: Scalars['String'];
+};
+
 export type Grade = {
     __typename?: 'Grade';
     category_id: Scalars['String'];
     id: Scalars['String'];
+    score: Scalars['Float'];
+    student_id: Scalars['String'];
+};
+
+export type GradeInput = {
+    category_id: Scalars['String'];
     score: Scalars['Float'];
     student_id: Scalars['String'];
 };
@@ -93,16 +134,11 @@ export type MutationCreateEnrollmentArgs = {
 };
 
 export type MutationCreateGradeArgs = {
-    category_id: Scalars['String'];
-    score: Scalars['Float'];
-    student_id: Scalars['String'];
+    grade_input: GradeInput;
 };
 
 export type MutationCreateGradingCategoryArgs = {
-    group_id: Scalars['String'];
-    name: Scalars['String'];
-    subject_id: Scalars['String'];
-    weight: Scalars['Float'];
+    category_input: CategoryInput;
 };
 
 export type MutationDeleteGradeArgs = {
@@ -129,18 +165,13 @@ export type MutationRegisterArgs = {
 };
 
 export type MutationUpdateGradeArgs = {
-    category_id: Scalars['String'];
+    grade_input: GradeInput;
     id: Scalars['String'];
-    score: Scalars['Float'];
-    student_id: Scalars['String'];
 };
 
 export type MutationUpdateGradingCategoryArgs = {
-    groupId: Scalars['String'];
+    category_input: CategoryInput;
     id: Scalars['String'];
-    name: Scalars['String'];
-    subject_id: Scalars['String'];
-    weight: Scalars['Float'];
 };
 
 export type MutationUpdateUserArgs = {
@@ -163,13 +194,20 @@ export type Profile = {
 
 export type Query = {
     __typename?: 'Query';
+    getCareerById: Careers;
+    getCareerbyName: Array<Careers>;
     getData: Data;
+    getDepartmentById: Departments;
+    getDepartmentbyName: Array<Departments>;
     getEnrollmentById: Enrollment;
     getEnrollmentsByFilters: Array<Enrollment>;
-    getGradeById: Grade;
+    getFacultyById: Faculties;
+    getFacultybyName: Array<Faculties>;
+    getGrade: Grade;
     getGrades: Array<Grade>;
     getGradingCategories: Array<Category>;
     getGradingCategory: Category;
+    getGroupById: ClassGroups;
     getProfiles: Array<Profile>;
     getProfilesById: Profile;
     getSchedule: Array<Enrollment>;
@@ -185,8 +223,24 @@ export type Query = {
     pong: Scalars['String'];
 };
 
+export type QueryGetCareerByIdArgs = {
+    careerId: Scalars['Float'];
+};
+
+export type QueryGetCareerbyNameArgs = {
+    name: Scalars['String'];
+};
+
 export type QueryGetDataArgs = {
     msName: Scalars['String'];
+};
+
+export type QueryGetDepartmentByIdArgs = {
+    departmentId: Scalars['Float'];
+};
+
+export type QueryGetDepartmentbyNameArgs = {
+    name: Scalars['String'];
 };
 
 export type QueryGetEnrollmentByIdArgs = {
@@ -199,12 +253,34 @@ export type QueryGetEnrollmentsByFiltersArgs = {
     subject?: InputMaybe<Scalars['String']>;
 };
 
-export type QueryGetGradeByIdArgs = {
+export type QueryGetFacultyByIdArgs = {
+    facultyId: Scalars['Float'];
+};
+
+export type QueryGetFacultybyNameArgs = {
+    name: Scalars['String'];
+};
+
+export type QueryGetGradeArgs = {
     id: Scalars['String'];
+};
+
+export type QueryGetGradesArgs = {
+    category_id?: InputMaybe<Scalars['String']>;
+    student_id?: InputMaybe<Scalars['String']>;
+};
+
+export type QueryGetGradingCategoriesArgs = {
+    group_id?: InputMaybe<Scalars['String']>;
+    subject_code?: InputMaybe<Scalars['String']>;
 };
 
 export type QueryGetGradingCategoryArgs = {
     id: Scalars['String'];
+};
+
+export type QueryGetGroupByIdArgs = {
+    classGroupId: Scalars['String'];
 };
 
 export type QueryGetProfilesByIdArgs = {
@@ -225,7 +301,7 @@ export type QueryGetSubjectbyCareerArgs = {
 };
 
 export type QueryGetSubjectbyCodeArgs = {
-    code: Scalars['Float'];
+    code: Scalars['String'];
 };
 
 export type QueryGetSubjectbyNameArgs = {
@@ -235,7 +311,7 @@ export type QueryGetSubjectbyNameArgs = {
 export type Subject = {
     __typename?: 'Subject';
     career: Scalars['Float'];
-    code: Scalars['Float'];
+    code: Scalars['String'];
     credits: Scalars['Float'];
     curriculum?: Maybe<Scalars['String']>;
     name: Scalars['String'];
@@ -263,13 +339,13 @@ export type GetSubjectbyNameQuery = {
         name: string;
         curriculum?: string | null;
         credits: number;
-        code: number;
+        code: string;
         career: number;
     }>;
 };
 
 export type GetSubjectbyCodeQueryVariables = Exact<{
-    code: Scalars['Float'];
+    code: Scalars['String'];
 }>;
 
 export type GetSubjectbyCodeQuery = {
@@ -280,7 +356,7 @@ export type GetSubjectbyCodeQuery = {
         name: string;
         curriculum?: string | null;
         credits: number;
-        code: number;
+        code: string;
         career: number;
     }>;
 };
@@ -297,7 +373,7 @@ export type GetSubjectbyCareerQuery = {
         name: string;
         curriculum?: string | null;
         credits: number;
-        code: number;
+        code: string;
         career: number;
     }>;
 };
@@ -329,7 +405,7 @@ export class GetSubjectbyNameGQL extends Apollo.Query<
     }
 }
 export const GetSubjectbyCodeDocument = gql`
-    query GetSubjectbyCode($code: Float!) {
+    query GetSubjectbyCode($code: String!) {
         getSubjectbyCode(code: $code) {
             subject_id
             name
