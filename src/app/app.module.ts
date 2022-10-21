@@ -35,3 +35,5 @@ import { RegisterPageComponent } from './components/registerPage/registerPage.co
     bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+sirve;
