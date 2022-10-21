@@ -14,6 +14,9 @@
     "commit": "cz",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": ["npm run lint", "npm run format", "npm run type:check"]
+  },
   "license": "GPL-3.0",
   "homepage": "https://github.com/sarodriguezva/aims_web_app#readme",
   "private": true,
