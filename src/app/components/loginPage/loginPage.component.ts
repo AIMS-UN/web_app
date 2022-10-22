@@ -27,4 +27,12 @@ export class LoginPageComponent implements OnInit {
         console.log(data);
         return false;
     }
+
+    checkPass(passwordField: HTMLInputElement): void {
+        const password = passwordField.value;
+        if (password.length < 5) {
+            console.log('less');
+            passwordField.style.color = 'red';
+        }
+    }
 }

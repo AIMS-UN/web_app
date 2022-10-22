@@ -1,7 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap/scss/bootstrap-reboot';
 @import 'bootstrap/scss/bootstrap-grid';
+
+$my-primary: mat.define-palette(mat.$blue-palette, 500);
+$my-accent: mat.define-palette(mat.$green-palette, 600, 700, 800);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $my-primary,
+            accent: $my-accent,
+            warn: $my-warn,
+        ),
+    )
+);
+
+@include mat.all-component-themes($my-theme);
+
+:root {
+    --primary: #1565c0;
+}
 
 html,
 body {
@@ -10,4 +32,9 @@ body {
 body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+    color: var(--primary);
+    font-weight: 500 !important;
 }

@@ -7,17 +7,33 @@
                 appearance="legacy"
                 (submit)="loginUser(userNameField, passwordField)"
             >
-                <mat-form-field class="example-full-width">
+                <mat-form-field
+                    class="example-full-width"
+                    [hideRequiredMarker]="true"
+                >
                     <mat-label>Nombre de usuario</mat-label>
-                    <input matInput #userNameField />
+                    <input required matInput #userNameField />
                 </mat-form-field>
                 <br />
-                <mat-form-field class="example-full-width">
+                <mat-form-field
+                    class="example-full-width"
+                    [hideRequiredMarker]="true"
+                >
                     <mat-label>Contraseña</mat-label>
-                    <input matInput type="password" #passwordField />
+                    <input
+                        required
+                        matInput
+                        type="password"
+                        #passwordField
+                        (focusout)="checkPass(userNameField)"
+                    />
                 </mat-form-field>
                 <br />
-                <button mat-raised-button color="primary">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    class="logButtonMargin"
+                >
                     Iniciar Sesión
                 </button>
             </form>

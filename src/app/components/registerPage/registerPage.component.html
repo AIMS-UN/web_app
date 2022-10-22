@@ -1,19 +1,20 @@
-<div class="container main">
+<div class="container main d-flex justify-content-center align-items-center">
     <div class="row">
         <div class="col">
-            <p>Regístrate</p>
+            <h1>Regístrate</h1>
             <form
                 class="example-form"
                 (submit)="
                     registerUser(userNameField, passwordField, teacherField)
                 "
+                appearance="legacy"
             >
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width">
                     <mat-label>Nombre de usuario</mat-label>
                     <input matInput #userNameField />
                 </mat-form-field>
                 <br />
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width">
                     <mat-label>Contraseña</mat-label>
                     <input matInput type="password" #passwordField />
                 </mat-form-field>
@@ -26,15 +27,16 @@
                         >Profesor</mat-radio-button
                     >
                 </mat-radio-group>
-                <br />
-                <button mat-raised-button color="primary">Registrate</button>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    class="regButtonMargin"
+                >
+                    Registrate
+                </button>
             </form>
             <br />
             <p>¿Ya tienes una cuenta? Accede desde <a href="/login">aquí</a></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
             <p>Mensajes de Petición</p>
             <p></p>
         </div>

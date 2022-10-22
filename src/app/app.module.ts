@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppMaterialModule } from './app.material.module';
 
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { LoginPageComponent } from './components/loginPage/loginPage.component';
 import { RegisterPageComponent } from './components/registerPage/registerPage.component';
@@ -19,6 +20,7 @@ import { RegisterPageComponent } from './components/registerPage/registerPage.co
         LoginPageComponent,
         RegisterPageComponent,
         DummyComponent,
+        DashboardComponent,
     ],
     imports: [
         BrowserModule,
