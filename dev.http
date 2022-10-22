@@ -1,0 +1,60 @@
+@baseUrl=http://localhost:3000/graphql
+
+@token={{login.response.headers.set-cookie}}
+
+### login
+# @name login
+POST {{baseUrl}} HTTP/1.1
+X-Request-Type: GraphQL
+x-forwarded-proto: https
+Content-Type: application/json
+
+mutation {
+  login(username: "userTest", password: "userTest") {
+    id,
+    username
+  }
+}
+
+### Register
+# @name register
+POST {{baseUrl}} HTTP/1.1
+X-Request-Type: GraphQL
+x-forwarded-proto: https
+Content-Type: application/json
+
+mutation {
+  register(username: "userTest", password: "userTest", role: "teacher") {
+    id,
+    username,
+    role
+  }
+}
+
+### MyAccount
+# @name myAccount
+POST {{baseUrl}} HTTP/1.1
+X-Request-Type: GraphQL
+x-forwarded-proto: https
+Content-Type: application/json
+Cookie: {{token}}
+
+query {
+  myAccount {
+    id,
+    username,
+    role
+  }
+}
+
+### Ping
+# @name ping
+POST {{baseUrl}} HTTP/1.1
+X-Request-Type: GraphQL
+x-forwarded-proto: https
+Content-Type: application/json
+Cookie: {{token}}
+
+query Ping {
+  ping
+}
