@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-    PingGQL,
-    PingQuery,
+    GetDataGQL,
+    GetDataQuery,
 } from 'src/app/services/graphql/generated/ping.gql.service';
 
 @Component({
@@ -12,19 +12,21 @@ import {
     styleUrls: ['./dummy.component.css'],
 })
 export class DummyComponent implements OnInit {
-    ping!: Observable<PingQuery['ping']>;
-    pingJson!: string;
+    data!: Observable<GetDataQuery['getData']['name']>;
+    dataJson!: string;
 
-    constructor(private pingGQL: PingGQL) {}
+    constructor(private dataGQL: GetDataGQL) {}
 
     ngOnInit() {
-        this.ping = this.pingGQL.watch().valueChanges.pipe(
-            map((result) => {
-                console.log(result.data.ping);
-                console.log(result.loading);
-                this.pingJson = JSON.stringify(result);
-                return result.data.ping;
-            })
-        );
+        this.data = this.dataGQL
+            .watch({ msName: 'enrollments' })
+            .valueChanges.pipe(
+                map((result) => {
+                    console.log(result.data.getData);
+                    console.log(result.loading);
+                    this.dataJson = JSON.stringify(result);
+                    return result.data.getData.name;
+                })
+            );
     }
 }
