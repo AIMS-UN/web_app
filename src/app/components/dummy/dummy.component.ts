@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-/*import {
-    MyAccountGQL,
-    MyAccountQuery,
-} from 'src/app/services/graphql/generated/accounts.gql.service';*/
 import {
     PingGQL,
     PingQuery,
@@ -16,32 +12,19 @@ import {
     styleUrls: ['./dummy.component.css'],
 })
 export class DummyComponent implements OnInit {
-    //account: Observable<MyAccountQuery['myAccount']>;
-    //accountJson: string;
-    ping: Observable<PingQuery['ping']>;
-    pingJson: string;
+    ping!: Observable<PingQuery['ping']>;
+    pingJson!: string;
 
-    constructor(/*myAccountGQL: MyAccountGQL*/ pingGQL: PingGQL) {
-        /*
-        this.account = myAccountGQL.watch().valueChanges.pipe(
-            map((result) => {
-                console.log(result);
-                return result.data.myAccount;
-            })
-        );
-        this.accountJson = JSON.stringify(this.account);
-        */
+    constructor(private pingGQL: PingGQL) {}
 
-        this.ping = pingGQL.watch().valueChanges.pipe(
+    ngOnInit() {
+        this.ping = this.pingGQL.watch().valueChanges.pipe(
             map((result) => {
                 console.log(result.data.ping);
+                console.log(result.loading);
+                this.pingJson = JSON.stringify(result);
                 return result.data.ping;
             })
         );
-        this.pingJson = JSON.stringify(this.ping);
-    }
-
-    ngOnInit() {
-        return;
     }
 }
