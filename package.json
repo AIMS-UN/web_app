@@ -60,6 +60,7 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@graphql-codegen/cli": "2.13.7",
     "@graphql-codegen/introspection": "2.2.1",
+    "@graphql-codegen/near-operation-file-preset": "^2.4.3",
     "@graphql-codegen/typescript": "^2.7.5",
     "@graphql-codegen/typescript-apollo-angular": "3.5.5",
     "@graphql-codegen/typescript-operations": "^2.5.5",
