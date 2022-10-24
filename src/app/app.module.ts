@@ -10,10 +10,10 @@ import { AppComponent } from './app.component';
 import { AppMaterialModule } from './app.material.module';
 
 import { DummyComponent } from './components/dummy/dummy.component';
-import { HomeComponent } from './components/home/home.component';
-import { LoginPageComponent } from './components/loginPage/loginPage.component';
-import { RegisterPageComponent } from './components/registerPage/registerPage.component';
-import { ReportComponent } from './components/report/report.component';
+import { HomeComponent } from './components/home-page/home.component';
+import { LoginPageComponent } from './components/login-page/loginPage.component';
+import { RegisterPageComponent } from './components/register-page/registerPage.component';
+import { ReportComponent } from './components/report-page/report.component';
 
 @NgModule({
     declarations: [
