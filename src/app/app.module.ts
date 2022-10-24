@@ -12,6 +12,7 @@ import { AppMaterialModule } from './app.material.module';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { HomeComponent } from './components/home-page/home.component';
 import { LoginPageComponent } from './components/login-page/loginPage.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { RegisterPageComponent } from './components/register-page/registerPage.component';
 import { ReportComponent } from './components/report-page/report.component';
 import { StudentGradingPageComponent } from './components/student-grading-page/student-grading-page.component';
@@ -25,6 +26,7 @@ import { StudentGradingPageComponent } from './components/student-grading-page/s
         HomeComponent,
         ReportComponent,
         StudentGradingPageComponent,
+        ProfilePageComponent,
     ],
     imports: [
         BrowserModule,
