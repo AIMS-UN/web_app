@@ -6,9 +6,17 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./profile-page.component.css'],
 })
 export class ProfilePageComponent implements OnInit {
+    editable: boolean = false;
+
     constructor() {}
 
     ngOnInit() {
         return;
+    }
+
+    toggleEdit(fields: HTMLInputElement[]): void {
+        fields.forEach((field) => {
+            field.disabled = !field.disabled;
+        });
     }
 }

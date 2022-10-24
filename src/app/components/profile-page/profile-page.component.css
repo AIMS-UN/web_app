@@ -1,0 +1,13 @@
+mat-form-field {
+    width: 60%;
+}
+
+.editProfile {
+    background-color: var(--primary);
+    color: white;
+    width: 100px;
+    position: relative;
+    top: -35px;
+    left: 320px;
+
+}
