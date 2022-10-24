@@ -17,6 +17,8 @@ import { RegisterPageComponent } from './components/register-page/registerPage.c
 import { ReportComponent } from './components/report-page/report.component';
 import { SchedulePageComponent } from './components/schedule-page/schedule-page.component';
 import { StudentGradingPageComponent } from './components/student-grading-page/student-grading-page.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
     declarations: [
@@ -38,6 +40,10 @@ import { StudentGradingPageComponent } from './components/student-grading-page/s
         AppMaterialModule,
         GraphQLModule,
         HttpClientModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }),
     ],
     providers: [],
     bootstrap: [AppComponent],
