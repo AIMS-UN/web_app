@@ -1,5 +1,33 @@
 <!-- *ngIf="logged" -->
-<mat-toolbar color="primary" style="height: 3rem">
-    <span>AIMS</span>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<div *ngIf="logged">
+    <mat-toolbar class="toolbar">
+        <img src="../assets/logoNegative.png" class="logoIcon" />
+        <span>AIMS</span>
+    </mat-toolbar>
+    <mat-sidenav-container>
+        <mat-sidenav mode="side" opened>
+            <h3>Resumen</h3>
+            <a mat-flat-button href="#"> Resumen </a>
+            <mat-divider></mat-divider>
+            <h3>Perfil académico</h3>
+            <a mat-flat-button href="#"> Reporte académico </a>
+            <a mat-flat-button href="#"> Calificaciones </a>
+            <a mat-flat-button href="#"> Datos personales </a>
+            <mat-divider></mat-divider>
+            <h3>Asignaturas</h3>
+            <a mat-flat-button href="#"> Horario </a>
+            <a mat-flat-button href="#"> Inscripciones </a>
+            <a mat-flat-button href="#"> Búsqueda </a>
+            <mat-divider></mat-divider>
+            <h3>Docencia</h3>
+            <a mat-flat-button href="#"> Asignaturas </a>
+            <a mat-flat-button href="#"> Calificaciones </a>
+            <mat-divider></mat-divider>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+<router-outlet *ngIf="!logged"></router-outlet>
