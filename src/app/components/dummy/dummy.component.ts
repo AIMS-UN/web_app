@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-    MyAccountGQL,
-    MyAccountQuery,
-} from 'src/app/services/graphql/generated/accounts.gql.service';
+    GetDataGQL,
+    GetDataQuery,
+} from 'src/app/services/graphql/generated/ping.gql.service';
 
 @Component({
     selector: 'app-dummy',
@@ -12,14 +12,21 @@ import {
     styleUrls: ['./dummy.component.css'],
 })
 export class DummyComponent implements OnInit {
-    myAccount: Observable<MyAccountQuery['myAccount']>;
-    constructor(myAccountGQL: MyAccountGQL) {
-        this.myAccount = myAccountGQL
-            .watch()
-            .valueChanges.pipe(map((result) => result.data.myAccount));
-    }
+    data!: Observable<GetDataQuery['getData']['name']>;
+    dataJson!: string;
+
+    constructor(private dataGQL: GetDataGQL) {}
 
     ngOnInit() {
-        return;
+        this.data = this.dataGQL
+            .watch({ msName: 'enrollments' })
+            .valueChanges.pipe(
+                map((result) => {
+                    console.log(result.data.getData);
+                    console.log(result.loading);
+                    this.dataJson = JSON.stringify(result);
+                    return result.data.getData.name;
+                })
+            );
     }
 }
