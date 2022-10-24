@@ -1,0 +1,38 @@
+mat-sidenav-container {
+    position: relative;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+}
+
+mat-sidenav {
+    padding: 10px 20px;
+    width: 20vw;
+    box-shadow: 4px 0px 5px lightblue;
+}
+
+mat-sidenav-content {
+    padding: 40px 40px;
+    background-color: white;
+}
+
+a {
+    display: block;
+    text-align: left;
+}
+
+mat-divider {
+    margin: 10px;
+    border-top-color: darkgray;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+mat-card {
+    margin: 10px 10px;
+}
