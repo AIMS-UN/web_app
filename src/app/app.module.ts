@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home-page/home.component';
 import { LoginPageComponent } from './components/login-page/loginPage.component';
 import { RegisterPageComponent } from './components/register-page/registerPage.component';
 import { ReportComponent } from './components/report-page/report.component';
+import { StudentGradingPageComponent } from './components/student-grading-page/student-grading-page.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { ReportComponent } from './components/report-page/report.component';
         DummyComponent,
         HomeComponent,
         ReportComponent,
+        StudentGradingPageComponent,
     ],
     imports: [
         BrowserModule,
