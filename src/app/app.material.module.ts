@@ -25,6 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatCardModule,
         MatSelectModule,
         MatExpansionModule,
+        MatDividerModule,
     ],
     exports: [
         MatButtonModule,
@@ -38,6 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatCardModule,
         MatSelectModule,
         MatExpansionModule,
+        MatDividerModule,
     ],
 })
 export class AppMaterialModule {}

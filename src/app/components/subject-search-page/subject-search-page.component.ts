@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./subject-search-page.component.css'],
 })
 export class SubjectSearchPageComponent implements OnInit {
+    searchState: string = '';
+
     constructor() {}
 
     ngOnInit() {

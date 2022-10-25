@@ -7,6 +7,7 @@ import { RegisterPageComponent } from './components/register-page/registerPage.c
 import { ReportComponent } from './components/report-page/report.component';
 import { SchedulePageComponent } from './components/schedule-page/schedule-page.component';
 import { StudentGradingPageComponent } from './components/student-grading-page/student-grading-page.component';
+import { SubjectSearchPageComponent } from './components/subject-search-page/subject-search-page.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'studentGrading', component: StudentGradingPageComponent },
     { path: 'profile', component: ProfilePageComponent },
     { path: 'schedule', component: SchedulePageComponent },
+    { path: 'subject', component: SubjectSearchPageComponent },
 ];
 
 @NgModule({
