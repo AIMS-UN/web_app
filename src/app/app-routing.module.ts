@@ -23,6 +23,7 @@ const routes: Routes = [
     { path: 'subject', component: SubjectSearchPageComponent },
     { path: 'enrollment', component: EnrollmentPageComponent },
     { path: 'dummy', component: DummyComponent },
+    { path: '**', component: HomeComponent }, //TODO: PageNotFoundComponent
 ];
 
 @NgModule({

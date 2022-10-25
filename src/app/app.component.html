@@ -1,4 +1,3 @@
-<!-- *ngIf="logged" -->
 <div *ngIf="logged">
     <mat-toolbar class="toolbar">
         <img src="../assets/logoNegative.png" class="logoIcon" />
@@ -10,14 +9,14 @@
             <a mat-flat-button href="#"> Resumen </a>
             <mat-divider></mat-divider>
             <h3>Perfil académico</h3>
-            <a mat-flat-button href="report"> Reporte académico </a>
-            <a mat-flat-button href="studentGrading"> Calificaciones </a>
-            <a mat-flat-button href="profile"> Datos personales </a>
+            <a mat-flat-button routerLink="/report"> Reporte académico </a>
+            <a mat-flat-button routerLink="/studentGrading"> Calificaciones </a>
+            <a mat-flat-button routerLink="/profile"> Datos personales </a>
             <mat-divider></mat-divider>
             <h3>Asignaturas</h3>
-            <a mat-flat-button href="schedule"> Horario </a>
-            <a mat-flat-button href="enrollment"> Inscripciones </a>
-            <a mat-flat-button href="subject"> Búsqueda </a>
+            <a mat-flat-button routerLink="/schedule"> Horario </a>
+            <a mat-flat-button routerLink="/enrollment"> Inscripciones </a>
+            <a mat-flat-button routerLink="/subject"> Búsqueda </a>
             <mat-divider></mat-divider>
             <h3>Docencia</h3>
             <a mat-flat-button href="#"> Asignaturas </a>
