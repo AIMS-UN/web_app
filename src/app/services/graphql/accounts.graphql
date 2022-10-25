@@ -7,3 +7,47 @@ query MyAccount {
     createdAt
   }
 }
+
+mutation GetUserByID($userId: String!) {
+  getUserByID(userID: $userId) {
+    id
+    username
+    role
+    updatedAt
+    createdAt
+  }
+}
+
+mutation Login($password: String!, $username: String!) {
+  login(password: $password, username: $username) {
+    id
+    username
+    role
+    updatedAt
+    createdAt
+  }
+}
+
+mutation Register($role: String!, $username: String!, $password: String!) {
+  register(role: $role, username: $username, password: $password) {
+    id
+    username
+    role
+    updatedAt
+    createdAt
+  }
+}
+
+mutation Logout {
+  logout
+}
+
+mutation UpdateUser($role: String!, $password: String!, $username: String!) {
+  updateUser(role: $role, password: $password, username: $username) {
+    id
+    username
+    role
+    updatedAt
+    createdAt
+  }
+}

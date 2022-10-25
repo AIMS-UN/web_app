@@ -19,3 +19,27 @@ query GetEnrollmentById($id: String!) {
     finalGrade
   }
 }
+
+mutation CreateEnrollment($semester: String!, $group: String!, $subject: String!) {
+  createEnrollment(semester: $semester, group: $group, subject: $subject) {
+    id
+    user
+    group
+    subject
+    semester
+    finalGrade
+  }
+}
+
+mutation CancelEnrollment($semester: String!, $subject: String!) {
+  cancelEnrollment(semester: $semester, subject: $subject) {
+    id
+    user
+    group
+    subject
+    semester
+    finalGrade
+  }
+}
+
+

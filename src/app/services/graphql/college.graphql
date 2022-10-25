@@ -1,40 +1,14 @@
-query GetGroupById($classGroupId: String!) {
-  getGroupById(classGroupId: $classGroupId) {
-    classGroupId
-    max_capacity
-    teacher_id
-  }
-}
-
-query GetFacultybyName($name: String!) {
-  getFacultybyName(name: $name) {
-    facultyId
-    name
-  }
-}
-
-query GetDepartmentbyName($name: String!) {
-  getDepartmentbyName(name: $name) {
-    departmentId
-    name
-    faculties {
-      facultyId
-      name
-    }
-  }
-}
-
-query GetCareerbyName($name: String!) {
-  getCareerbyName(name: $name) {
+query GetCareers {
+  getCareers {
     careerId
-    name
+    careerName
     credits
-    departments {
+    department {
       departmentId
-      name
-      faculties {
+      departmentName
+      faculty {
         facultyId
-        name
+        facultyName
       }
     }
   }
@@ -43,15 +17,31 @@ query GetCareerbyName($name: String!) {
 query GetCareerById($careerId: Float!) {
   getCareerById(careerId: $careerId) {
     careerId
-    name
+    careerName
     credits
-    departments {
+    department {
       departmentId
-      name
-      faculties {
+      departmentName
+      faculty {
         facultyId
-        name
+        facultyName
       }
+    }
+  }
+}
+
+query GetDepartments {
+  getDepartments {
+    departmentId
+    departmentName
+    faculty {
+      facultyId
+      facultyName
+    }
+    careers {
+      careerId
+      careerName
+      credits
     }
   }
 }
@@ -59,10 +49,31 @@ query GetCareerById($careerId: Float!) {
 query GetDepartmentById($departmentId: Float!) {
   getDepartmentById(departmentId: $departmentId) {
     departmentId
-    name
-    faculties {
+    departmentName
+    faculty {
       facultyId
-      name
+      facultyName
+    }
+    careers {
+      careerId
+      careerName
+      credits
+    }
+  }
+}
+
+query GetFaculties {
+  getFaculties {
+    facultyId
+    facultyName
+    departments {
+      departmentId
+      departmentName
+      careers {
+        careerId
+        careerName
+        credits
+      }
     }
   }
 }
@@ -70,6 +81,15 @@ query GetDepartmentById($departmentId: Float!) {
 query GetFacultyById($facultyId: Float!) {
   getFacultyById(facultyId: $facultyId) {
     facultyId
-    name
+    facultyName
+    departments {
+      departmentId
+      departmentName
+      careers {
+        careerId
+        careerName
+        credits
+      }
+    }
   }
 }

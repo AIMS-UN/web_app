@@ -35,3 +35,27 @@ query GetGrade($id: String!) {
     score
   }
 }
+
+mutation CreateGradingCategory($categoryInput: CategoryInput!) {
+  createGradingCategory(categoryInput: $categoryInput)
+}
+
+mutation UpdateGradingCategory($categoryInput: CategoryInput!, $updateGradingCategoryId: String!) {
+  updateGradingCategory(categoryInput: $categoryInput, id: $updateGradingCategoryId)
+}
+
+mutation DeleteGradingCategory($deleteGradingCategoryId: String!) {
+  deleteGradingCategory(id: $deleteGradingCategoryId)
+}
+
+mutation CreateGrade($gradeInput: GradeInput!) {
+  createGrade(gradeInput: $gradeInput)
+}
+
+mutation UpdateGrade($gradeInput: GradeInput!, $updateGradeId: String!) {
+  updateGrade(gradeInput: $gradeInput, id: $updateGradeId)
+}
+
+mutation DeleteGrade($deleteGradeId: String!) {
+  deleteGrade(id: $deleteGradeId)
+}

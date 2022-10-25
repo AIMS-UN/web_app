@@ -1,22 +1,47 @@
-query GetSchedule($userId: String!) {
-  getSchedule(userId: $userId) {
-    id
-    user
-    group
-    subject
-    semester
-    finalGrade
+query GetMySchedule {
+  getMySchedule {
+    groupId
+    maxCapacity
+    teacherId
+    subject {
+      subjectId
+      subjectName
+      subjectCode
+      careerId
+      curriculum
+      credits
+    }
+    schedules {
+      scheduleId
+      day
+      startTime
+      endTime
+      classroom
+      building
+    }
   }
 }
 
-query GetScheduleBySemester($semester: String!, $userId: String!) {
-  getScheduleBySemester(semester: $semester, userId: $userId) {
-    id
-    user
-    group
-    subject
-    semester
-    finalGrade
+query GetMyScheduleBySemester($semester: String!) {
+  getMyScheduleBySemester(semester: $semester) {
+    groupId
+    maxCapacity
+    teacherId
+    subject {
+      subjectId
+      subjectName
+      subjectCode
+      careerId
+      curriculum
+      credits
+    }
+    schedules {
+      scheduleId
+      day
+      startTime
+      endTime
+      classroom
+      building
+    }
   }
 }
-

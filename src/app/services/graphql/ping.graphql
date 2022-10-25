@@ -12,3 +12,15 @@ query GetData($msName: String!) {
     message
   }
 }
+
+query PingAuth {
+  pingAuth
+}
+
+query PingStudent {
+  pingStudent
+}
+
+query PingTeacher {
+  pingTeacher
+}

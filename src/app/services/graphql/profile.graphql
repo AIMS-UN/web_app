@@ -12,7 +12,6 @@ query GetProfiles {
       approved_credits
       reprobed_credits
       GPA
-      enrollment_id
       career
     }
   }
@@ -32,8 +31,38 @@ query GetProfilesById($userId: String!) {
       approved_credits
       reprobed_credits
       GPA
-      enrollment_id
       career
     }
   }
+}
+
+query GetMyProfile {
+  getMyProfile {
+    user_id
+    name
+    lastname
+    email
+    birthdate
+    phone_number
+    address
+    historials {
+      coursed_credits
+      approved_credits
+      reprobed_credits
+      GPA
+      career
+    }
+  }
+}
+
+mutation CreateProfile($profileInput: ProfileInput!) {
+  createProfile(profileInput: $profileInput)
+}
+
+mutation UpdateProfile($profileInput: ProfileInput!) {
+  updateProfile(profileInput: $profileInput)
+}
+
+mutation Mutation {
+  deleteProfile
 }

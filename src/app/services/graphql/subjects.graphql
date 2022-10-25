@@ -1,32 +1,167 @@
-query GetSubjectbyName($name: String!) {
-  getSubjectbyName(name: $name) {
-    subject_id
-    name
+query GetSubjects {
+  getSubjects {
+    subjectId
+    subjectName
+    subjectCode
+    careerId
     curriculum
     credits
-    code
-    career
+    groups {
+      groupId
+      maxCapacity
+      teacherId
+      schedules {
+        scheduleId
+        day
+        startTime
+        endTime
+        classroom
+        building
+      }
+    }
   }
 }
 
-query GetSubjectbyCode($code: String!) {
-  getSubjectbyCode(code: $code) {
-    subject_id
-    name
+query GetSubjectByName($subjectName: String!) {
+  getSubjectByName(subjectName: $subjectName) {
+    subjectId
+    subjectName
+    subjectCode
+    careerId
     curriculum
     credits
-    code
-    career
+    groups {
+      groupId
+      maxCapacity
+      teacherId
+      schedules {
+        scheduleId
+        day
+        startTime
+        endTime
+        classroom
+        building
+      }
+    }
   }
 }
 
-query GetSubjectbyCareer($career: Float!) {
-  getSubjectbyCareer(career: $career) {
-    subject_id
-    name
+query GetSubjectByCode($subjectCode: String!) {
+  getSubjectByCode(subjectCode: $subjectCode) {
+    subjectId
+    subjectName
+    subjectCode
+    careerId
     curriculum
     credits
-    code
-    career
+    groups {
+      groupId
+      maxCapacity
+      teacherId
+      schedules {
+        scheduleId
+        day
+        startTime
+        endTime
+        classroom
+        building
+      }
+    }
+  }
+}
+
+query GetSubjectByCareer($careerId: Float!) {
+  getSubjectByCareer(careerId: $careerId) {
+    subjectId
+    subjectName
+    subjectCode
+    careerId
+    curriculum
+    credits
+    groups {
+      groupId
+      maxCapacity
+      teacherId
+      schedules {
+        scheduleId
+        day
+        startTime
+        endTime
+        classroom
+        building
+      }
+    }
+  }
+}
+
+query GetSubjectById($subjectId: Float!) {
+  getSubjectById(subjectId: $subjectId) {
+    subjectId
+    subjectName
+    subjectCode
+    careerId
+    curriculum
+    credits
+    groups {
+      groupId
+      maxCapacity
+      teacherId
+      schedules {
+        scheduleId
+        day
+        startTime
+        endTime
+        classroom
+        building
+      }
+    }
+  }
+}
+
+query GetClassGroups {
+  getClassGroups {
+    groupId
+    maxCapacity
+    teacherId
+    subject {
+      subjectId
+      subjectName
+      subjectCode
+      careerId
+      curriculum
+      credits
+    }
+    schedules {
+      scheduleId
+      day
+      startTime
+      endTime
+      classroom
+      building
+    }
+  }
+}
+
+query GetGroupById($classGroupId: String!) {
+  getGroupById(classGroupId: $classGroupId) {
+    groupId
+    maxCapacity
+    teacherId
+    subject {
+      subjectId
+      subjectName
+      subjectCode
+      careerId
+      curriculum
+      credits
+    }
+    schedules {
+      scheduleId
+      day
+      startTime
+      endTime
+      classroom
+      building
+    }
   }
 }
