@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatRadioButton } from '@angular/material/radio';
+import { RegisterGQL } from 'src/app/services/graphql/generated/accounts.gql.service';
 
 @Component({
     selector: 'app-register-page',
@@ -7,28 +7,25 @@ import { MatRadioButton } from '@angular/material/radio';
     styleUrls: ['./registerPage.component.css'],
 })
 export class RegisterPageComponent implements OnInit {
-    constructor() {}
+    username: string = '';
+    password: string = '';
+    role: string = '';
+    constructor(private registerGQL: RegisterGQL) {}
 
     ngOnInit() {
         return;
     }
 
-    registerUser(
-        userNameField: HTMLInputElement,
-        passwordField: HTMLInputElement,
-        teacherField: MatRadioButton
-    ): boolean {
-        const username = userNameField.value;
-        const password = passwordField.value;
-        const role = teacherField.checked ? 'teacher' : 'student';
-
-        const data = {
-            username,
-            password,
-            role,
-        };
-
-        console.log(data);
-        return false;
+    registerUser() {
+        console.log(this.username, this.password, this.role);
+        this.registerGQL
+            .mutate({
+                username: this.username,
+                password: this.password,
+                role: this.role,
+            })
+            .subscribe((result) => {
+                console.log(result);
+            });
     }
 }
