@@ -24,6 +24,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { EnrollmentPageComponent } from './components/enrollment-page/enrollment-page.component';
 import { SubjectSearchPageComponent } from './components/subject-search-page/subject-search-page.component';
+import { TeacherGradingPageComponent } from './components/teacher-grading-page/teacher-grading-page.component';
 
 registerLocaleData(localeEs);
 
@@ -40,6 +41,7 @@ registerLocaleData(localeEs);
         SchedulePageComponent,
         SubjectSearchPageComponent,
         EnrollmentPageComponent,
+        TeacherGradingPageComponent,
     ],
     imports: [
         BrowserModule,
