@@ -5,14 +5,19 @@
             <form
                 class="example-form"
                 appearance="legacy"
-                (submit)="loginUser(userNameField, passwordField)"
+                (submit)="loginUser()"
             >
                 <mat-form-field
                     class="example-full-width"
                     [hideRequiredMarker]="true"
                 >
                     <mat-label>Nombre de usuario</mat-label>
-                    <input required matInput #userNameField />
+                    <input
+                        required
+                        matInput
+                        [(ngModel)]="username"
+                        name="username"
+                    />
                 </mat-form-field>
                 <br />
                 <mat-form-field
@@ -24,8 +29,8 @@
                         required
                         matInput
                         type="password"
-                        #passwordField
-                        (focusout)="checkPass(userNameField)"
+                        [(ngModel)]="password"
+                        name="password"
                     />
                 </mat-form-field>
                 <br />

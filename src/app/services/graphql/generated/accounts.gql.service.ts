@@ -1,8 +1,8 @@
 import * as Types from './types';
 
-import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
+import { gql } from 'apollo-angular';
 export type MyAccountQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type MyAccountQuery = {

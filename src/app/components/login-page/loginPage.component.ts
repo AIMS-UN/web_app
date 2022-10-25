@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {
+    LoginGQL,
+    LoginMutation,
+} from 'src/app/services/graphql/generated/accounts.gql.service';
 
 @Component({
     selector: 'app-login-page',
@@ -6,33 +10,28 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./loginPage.component.css'],
 })
 export class LoginPageComponent implements OnInit {
-    constructor() {}
+    username: string = '';
+    password: string = '';
+    account: LoginMutation['login'] | undefined;
+
+    constructor(private loginGQL: LoginGQL) {}
 
     ngOnInit() {
         return;
     }
 
-    loginUser(
-        userNameField: HTMLInputElement,
-        passwordField: HTMLInputElement
-    ): boolean {
-        const username = userNameField.value;
-        const password = passwordField.value;
-
-        const data = {
-            username,
-            password,
-        };
-
-        console.log(data);
-        return false;
-    }
-
-    checkPass(passwordField: HTMLInputElement): void {
-        const password = passwordField.value;
-        if (password.length < 5) {
-            console.log('less');
-            passwordField.style.color = 'red';
-        }
+    loginUser() {
+        console.log(this.username, this.password);
+        this.loginGQL
+            .mutate({
+                username: this.username,
+                password: this.password,
+            })
+            .subscribe(({ data, loading }) => {
+                console.log(data);
+                this.account = data?.login;
+                console.log(this.account);
+                console.log(loading);
+            });
     }
 }

@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import {
     GetDataGQL,
     GetDataQuery,
+    PingTeacherGQL,
+    PingTeacherQuery,
 } from 'src/app/services/graphql/generated/ping.gql.service';
 
 @Component({
@@ -15,7 +17,12 @@ export class DummyComponent implements OnInit {
     data!: Observable<GetDataQuery['getData']['name']>;
     dataJson!: string;
 
-    constructor(private dataGQL: GetDataGQL) {}
+    pingTeacher!: Observable<PingTeacherQuery['pingTeacher']>;
+
+    constructor(
+        private dataGQL: GetDataGQL,
+        private teacherGQL: PingTeacherGQL
+    ) {}
 
     ngOnInit() {
         this.data = this.dataGQL
@@ -28,5 +35,14 @@ export class DummyComponent implements OnInit {
                     return result.data.getData.name;
                 })
             );
+    }
+
+    doPing() {
+        this.pingTeacher = this.teacherGQL.watch().valueChanges.pipe(
+            map((result) => {
+                console.log(result.data);
+                return result.data.pingTeacher;
+            })
+        );
     }
 }

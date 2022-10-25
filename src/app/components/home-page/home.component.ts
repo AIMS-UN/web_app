@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import {
+    MyAccountGQL,
+    MyAccountQuery,
+} from 'src/app/services/graphql/generated/accounts.gql.service';
 
 @Component({
     selector: 'app-home',
@@ -6,11 +12,16 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-    constructor() {
-        return;
-    }
+    username!: Observable<MyAccountQuery['myAccount']['username']>;
+
+    constructor(private accountGQL: MyAccountGQL) {}
 
     ngOnInit() {
-        return;
+        this.username = this.accountGQL.watch().valueChanges.pipe(
+            map((result) => {
+                return result.data.myAccount.username;
+            }),
+            startWith('[usuario]')
+        );
     }
 }

@@ -4,3 +4,6 @@
     <li>{{ dataJson }}</li>
     <li>{{ data | async }}</li>
 </ul>
+
+<p>Ping: {{ pingTeacher | async }}</p>
+<button (click)="doPing()">Click Me</button>
