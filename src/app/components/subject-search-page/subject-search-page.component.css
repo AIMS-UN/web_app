@@ -10,15 +10,6 @@ mat-card.PGA {
     padding: 15px;
 }
 
-.PGA p {
-    text-align: center;
-}
-
-.PGA mat-card-title p {
-    color: black;
-    font-size: 26pt;
-}
-
 mat-card-title {
     color: var(--secundary);
 }
