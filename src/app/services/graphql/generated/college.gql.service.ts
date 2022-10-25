@@ -1,72 +1,25 @@
 import * as Types from './types';
 
+import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import { gql } from 'apollo-angular';
-export type GetGroupByIdQueryVariables = Types.Exact<{
-    classGroupId: Types.Scalars['String'];
-}>;
+export type GetCareersQueryVariables = Types.Exact<{ [key: string]: never }>;
 
-export type GetGroupByIdQuery = {
+export type GetCareersQuery = {
     __typename?: 'Query';
-    getGroupById: {
-        __typename?: 'ClassGroups';
-        classGroupId: string;
-        max_capacity: number;
-        teacher_id: string;
-    };
-};
-
-export type GetFacultybyNameQueryVariables = Types.Exact<{
-    name: Types.Scalars['String'];
-}>;
-
-export type GetFacultybyNameQuery = {
-    __typename?: 'Query';
-    getFacultybyName: Array<{
-        __typename?: 'Faculties';
-        facultyId: number;
-        name: string;
-    }>;
-};
-
-export type GetDepartmentbyNameQueryVariables = Types.Exact<{
-    name: Types.Scalars['String'];
-}>;
-
-export type GetDepartmentbyNameQuery = {
-    __typename?: 'Query';
-    getDepartmentbyName: Array<{
-        __typename?: 'Departments';
-        departmentId: number;
-        name: string;
-        faculties: {
-            __typename?: 'Faculties';
-            facultyId: number;
-            name: string;
-        };
-    }>;
-};
-
-export type GetCareerbyNameQueryVariables = Types.Exact<{
-    name: Types.Scalars['String'];
-}>;
-
-export type GetCareerbyNameQuery = {
-    __typename?: 'Query';
-    getCareerbyName: Array<{
-        __typename?: 'Careers';
+    getCareers: Array<{
+        __typename?: 'CareerResponse';
         careerId: number;
-        name: string;
+        careerName: string;
         credits: string;
-        departments: {
-            __typename?: 'Departments';
+        department: {
+            __typename?: 'Department_Faculty';
             departmentId: number;
-            name: string;
-            faculties: {
-                __typename?: 'Faculties';
+            departmentName: string;
+            faculty: {
+                __typename?: 'Faculty';
                 facultyId: number;
-                name: string;
+                facultyName: string;
             };
         };
     }>;
@@ -79,21 +32,45 @@ export type GetCareerByIdQueryVariables = Types.Exact<{
 export type GetCareerByIdQuery = {
     __typename?: 'Query';
     getCareerById: {
-        __typename?: 'Careers';
+        __typename?: 'CareerResponse';
         careerId: number;
-        name: string;
+        careerName: string;
         credits: string;
-        departments: {
-            __typename?: 'Departments';
+        department: {
+            __typename?: 'Department_Faculty';
             departmentId: number;
-            name: string;
-            faculties: {
-                __typename?: 'Faculties';
+            departmentName: string;
+            faculty: {
+                __typename?: 'Faculty';
                 facultyId: number;
-                name: string;
+                facultyName: string;
             };
         };
     };
+};
+
+export type GetDepartmentsQueryVariables = Types.Exact<{
+    [key: string]: never;
+}>;
+
+export type GetDepartmentsQuery = {
+    __typename?: 'Query';
+    getDepartments: Array<{
+        __typename?: 'DepartmentResponse';
+        departmentId: number;
+        departmentName: string;
+        faculty: {
+            __typename?: 'Faculty';
+            facultyId: number;
+            facultyName: string;
+        };
+        careers: Array<{
+            __typename?: 'Career';
+            careerId: number;
+            careerName: string;
+            credits: string;
+        }>;
+    }>;
 };
 
 export type GetDepartmentByIdQueryVariables = Types.Exact<{
@@ -103,15 +80,43 @@ export type GetDepartmentByIdQueryVariables = Types.Exact<{
 export type GetDepartmentByIdQuery = {
     __typename?: 'Query';
     getDepartmentById: {
-        __typename?: 'Departments';
+        __typename?: 'DepartmentResponse';
         departmentId: number;
-        name: string;
-        faculties: {
-            __typename?: 'Faculties';
+        departmentName: string;
+        faculty: {
+            __typename?: 'Faculty';
             facultyId: number;
-            name: string;
+            facultyName: string;
         };
+        careers: Array<{
+            __typename?: 'Career';
+            careerId: number;
+            careerName: string;
+            credits: string;
+        }>;
     };
+};
+
+export type GetFacultiesQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type GetFacultiesQuery = {
+    __typename?: 'Query';
+    getFaculties: Array<{
+        __typename?: 'FacultyResponse';
+        facultyId: number;
+        facultyName: string;
+        departments: Array<{
+            __typename?: 'Department_Career';
+            departmentId: number;
+            departmentName: string;
+            careers: Array<{
+                __typename?: 'Career';
+                careerId: number;
+                careerName: string;
+                credits: string;
+            }>;
+        }>;
+    }>;
 };
 
 export type GetFacultyByIdQueryVariables = Types.Exact<{
@@ -121,95 +126,35 @@ export type GetFacultyByIdQueryVariables = Types.Exact<{
 export type GetFacultyByIdQuery = {
     __typename?: 'Query';
     getFacultyById: {
-        __typename?: 'Faculties';
+        __typename?: 'FacultyResponse';
         facultyId: number;
-        name: string;
+        facultyName: string;
+        departments: Array<{
+            __typename?: 'Department_Career';
+            departmentId: number;
+            departmentName: string;
+            careers: Array<{
+                __typename?: 'Career';
+                careerId: number;
+                careerName: string;
+                credits: string;
+            }>;
+        }>;
     };
 };
 
-export const GetGroupByIdDocument = gql`
-    query GetGroupById($classGroupId: String!) {
-        getGroupById(classGroupId: $classGroupId) {
-            classGroupId
-            max_capacity
-            teacher_id
-        }
-    }
-`;
-
-@Injectable({
-    providedIn: 'root',
-})
-export class GetGroupByIdGQL extends Apollo.Query<
-    GetGroupByIdQuery,
-    GetGroupByIdQueryVariables
-> {
-    override document = GetGroupByIdDocument;
-
-    constructor(apollo: Apollo.Apollo) {
-        super(apollo);
-    }
-}
-export const GetFacultybyNameDocument = gql`
-    query GetFacultybyName($name: String!) {
-        getFacultybyName(name: $name) {
-            facultyId
-            name
-        }
-    }
-`;
-
-@Injectable({
-    providedIn: 'root',
-})
-export class GetFacultybyNameGQL extends Apollo.Query<
-    GetFacultybyNameQuery,
-    GetFacultybyNameQueryVariables
-> {
-    override document = GetFacultybyNameDocument;
-
-    constructor(apollo: Apollo.Apollo) {
-        super(apollo);
-    }
-}
-export const GetDepartmentbyNameDocument = gql`
-    query GetDepartmentbyName($name: String!) {
-        getDepartmentbyName(name: $name) {
-            departmentId
-            name
-            faculties {
-                facultyId
-                name
-            }
-        }
-    }
-`;
-
-@Injectable({
-    providedIn: 'root',
-})
-export class GetDepartmentbyNameGQL extends Apollo.Query<
-    GetDepartmentbyNameQuery,
-    GetDepartmentbyNameQueryVariables
-> {
-    override document = GetDepartmentbyNameDocument;
-
-    constructor(apollo: Apollo.Apollo) {
-        super(apollo);
-    }
-}
-export const GetCareerbyNameDocument = gql`
-    query GetCareerbyName($name: String!) {
-        getCareerbyName(name: $name) {
+export const GetCareersDocument = gql`
+    query GetCareers {
+        getCareers {
             careerId
-            name
+            careerName
             credits
-            departments {
+            department {
                 departmentId
-                name
-                faculties {
+                departmentName
+                faculty {
                     facultyId
-                    name
+                    facultyName
                 }
             }
         }
@@ -219,11 +164,11 @@ export const GetCareerbyNameDocument = gql`
 @Injectable({
     providedIn: 'root',
 })
-export class GetCareerbyNameGQL extends Apollo.Query<
-    GetCareerbyNameQuery,
-    GetCareerbyNameQueryVariables
+export class GetCareersGQL extends Apollo.Query<
+    GetCareersQuery,
+    GetCareersQueryVariables
 > {
-    override document = GetCareerbyNameDocument;
+    override document = GetCareersDocument;
 
     constructor(apollo: Apollo.Apollo) {
         super(apollo);
@@ -233,14 +178,14 @@ export const GetCareerByIdDocument = gql`
     query GetCareerById($careerId: Float!) {
         getCareerById(careerId: $careerId) {
             careerId
-            name
+            careerName
             credits
-            departments {
+            department {
                 departmentId
-                name
-                faculties {
+                departmentName
+                faculty {
                     facultyId
-                    name
+                    facultyName
                 }
             }
         }
@@ -260,14 +205,50 @@ export class GetCareerByIdGQL extends Apollo.Query<
         super(apollo);
     }
 }
+export const GetDepartmentsDocument = gql`
+    query GetDepartments {
+        getDepartments {
+            departmentId
+            departmentName
+            faculty {
+                facultyId
+                facultyName
+            }
+            careers {
+                careerId
+                careerName
+                credits
+            }
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class GetDepartmentsGQL extends Apollo.Query<
+    GetDepartmentsQuery,
+    GetDepartmentsQueryVariables
+> {
+    override document = GetDepartmentsDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
 export const GetDepartmentByIdDocument = gql`
     query GetDepartmentById($departmentId: Float!) {
         getDepartmentById(departmentId: $departmentId) {
             departmentId
-            name
-            faculties {
+            departmentName
+            faculty {
                 facultyId
-                name
+                facultyName
+            }
+            careers {
+                careerId
+                careerName
+                credits
             }
         }
     }
@@ -286,11 +267,51 @@ export class GetDepartmentByIdGQL extends Apollo.Query<
         super(apollo);
     }
 }
+export const GetFacultiesDocument = gql`
+    query GetFaculties {
+        getFaculties {
+            facultyId
+            facultyName
+            departments {
+                departmentId
+                departmentName
+                careers {
+                    careerId
+                    careerName
+                    credits
+                }
+            }
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class GetFacultiesGQL extends Apollo.Query<
+    GetFacultiesQuery,
+    GetFacultiesQueryVariables
+> {
+    override document = GetFacultiesDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
 export const GetFacultyByIdDocument = gql`
     query GetFacultyById($facultyId: Float!) {
         getFacultyById(facultyId: $facultyId) {
             facultyId
-            name
+            facultyName
+            departments {
+                departmentId
+                departmentName
+                careers {
+                    careerId
+                    careerName
+                    credits
+                }
+            }
         }
     }
 `;

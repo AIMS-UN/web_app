@@ -18,12 +18,19 @@ export type Scalars = {
     Float: number;
 };
 
-export type Careers = {
-    __typename?: 'Careers';
+export type Career = {
+    __typename?: 'Career';
     careerId: Scalars['Float'];
+    careerName: Scalars['String'];
     credits: Scalars['String'];
-    departments: Departments;
-    name: Scalars['String'];
+};
+
+export type CareerResponse = {
+    __typename?: 'CareerResponse';
+    careerId: Scalars['Float'];
+    careerName: Scalars['String'];
+    credits: Scalars['String'];
+    department: Department_Faculty;
 };
 
 export type Category = {
@@ -38,15 +45,24 @@ export type Category = {
 export type CategoryInput = {
     group_id: Scalars['String'];
     name: Scalars['String'];
-    subject_code: Scalars['String'];
     weight: Scalars['Float'];
 };
 
-export type ClassGroups = {
-    __typename?: 'ClassGroups';
-    classGroupId: Scalars['String'];
-    max_capacity: Scalars['Float'];
-    teacher_id: Scalars['String'];
+export type ClassGroup = {
+    __typename?: 'ClassGroup';
+    groupId: Scalars['String'];
+    maxCapacity: Scalars['Float'];
+    schedules: Array<Schedule>;
+    teacherId: Scalars['String'];
+};
+
+export type ClassGroupResponse = {
+    __typename?: 'ClassGroupResponse';
+    groupId: Scalars['String'];
+    maxCapacity: Scalars['Float'];
+    schedules: Array<Schedule>;
+    subject: Subject;
+    teacherId: Scalars['String'];
 };
 
 export type Data = {
@@ -55,11 +71,26 @@ export type Data = {
     name: Scalars['String'];
 };
 
-export type Departments = {
-    __typename?: 'Departments';
+export type DepartmentResponse = {
+    __typename?: 'DepartmentResponse';
+    careers: Array<Career>;
     departmentId: Scalars['Float'];
-    faculties: Faculties;
-    name: Scalars['String'];
+    departmentName: Scalars['String'];
+    faculty: Faculty;
+};
+
+export type Department_Career = {
+    __typename?: 'Department_Career';
+    careers: Array<Career>;
+    departmentId: Scalars['Float'];
+    departmentName: Scalars['String'];
+};
+
+export type Department_Faculty = {
+    __typename?: 'Department_Faculty';
+    departmentId: Scalars['Float'];
+    departmentName: Scalars['String'];
+    faculty: Faculty;
 };
 
 export type Enrollment = {
@@ -72,10 +103,17 @@ export type Enrollment = {
     user: Scalars['String'];
 };
 
-export type Faculties = {
-    __typename?: 'Faculties';
+export type Faculty = {
+    __typename?: 'Faculty';
     facultyId: Scalars['Float'];
-    name: Scalars['String'];
+    facultyName: Scalars['String'];
+};
+
+export type FacultyResponse = {
+    __typename?: 'FacultyResponse';
+    departments: Array<Department_Career>;
+    facultyId: Scalars['Float'];
+    facultyName: Scalars['String'];
 };
 
 export type Grade = {
@@ -98,7 +136,14 @@ export type Historials = {
     approved_credits: Scalars['Float'];
     career: Scalars['Float'];
     coursed_credits: Scalars['Float'];
-    enrollment_id: Scalars['Float'];
+    reprobed_credits: Scalars['Float'];
+};
+
+export type HistorialsInput = {
+    GPA: Scalars['Float'];
+    approved_credits: Scalars['Float'];
+    career: Scalars['Float'];
+    coursed_credits: Scalars['Float'];
     reprobed_credits: Scalars['Float'];
 };
 
@@ -108,14 +153,17 @@ export type Mutation = {
     createEnrollment: Enrollment;
     createGrade: Scalars['String'];
     createGradingCategory: Scalars['String'];
+    createProfile: Scalars['String'];
     deleteGrade: Scalars['String'];
     deleteGradingCategory: Scalars['String'];
+    deleteProfile: Scalars['String'];
     getUserByID: User;
     login: User;
     logout: Scalars['Boolean'];
     register: User;
     updateGrade: Scalars['String'];
     updateGradingCategory: Scalars['String'];
+    updateProfile: Scalars['String'];
     updateUser: User;
 };
 
@@ -131,11 +179,15 @@ export type MutationCreateEnrollmentArgs = {
 };
 
 export type MutationCreateGradeArgs = {
-    grade_input: GradeInput;
+    gradeInput: GradeInput;
 };
 
 export type MutationCreateGradingCategoryArgs = {
-    category_input: CategoryInput;
+    categoryInput: CategoryInput;
+};
+
+export type MutationCreateProfileArgs = {
+    profileInput: ProfileInput;
 };
 
 export type MutationDeleteGradeArgs = {
@@ -162,13 +214,17 @@ export type MutationRegisterArgs = {
 };
 
 export type MutationUpdateGradeArgs = {
-    grade_input: GradeInput;
+    gradeInput: GradeInput;
     id: Scalars['String'];
 };
 
 export type MutationUpdateGradingCategoryArgs = {
-    category_input: CategoryInput;
+    categoryInput: CategoryInput;
     id: Scalars['String'];
+};
+
+export type MutationUpdateProfileArgs = {
+    profileInput: ProfileInput;
 };
 
 export type MutationUpdateUserArgs = {
@@ -189,29 +245,43 @@ export type Profile = {
     user_id: Scalars['String'];
 };
 
+export type ProfileInput = {
+    address: Scalars['String'];
+    birthdate: Scalars['String'];
+    email: Scalars['String'];
+    historials: Array<HistorialsInput>;
+    lastname: Scalars['String'];
+    name: Scalars['String'];
+    phone_number: Scalars['String'];
+};
+
 export type Query = {
     __typename?: 'Query';
-    getCareerById: Careers;
-    getCareerbyName: Array<Careers>;
+    getCareerById: CareerResponse;
+    getCareers: Array<CareerResponse>;
+    getClassGroups: Array<ClassGroupResponse>;
     getData: Data;
-    getDepartmentById: Departments;
-    getDepartmentbyName: Array<Departments>;
+    getDepartmentById: DepartmentResponse;
+    getDepartments: Array<DepartmentResponse>;
     getEnrollmentById: Enrollment;
     getEnrollmentsByFilters: Array<Enrollment>;
-    getFacultyById: Faculties;
-    getFacultybyName: Array<Faculties>;
+    getFaculties: Array<FacultyResponse>;
+    getFacultyById: FacultyResponse;
     getGrade: Grade;
     getGrades: Array<Grade>;
     getGradingCategories: Array<Category>;
     getGradingCategory: Category;
-    getGroupById: ClassGroups;
+    getGroupById: ClassGroupResponse;
+    getMyProfile: Profile;
+    getMySchedule: Array<ClassGroupResponse>;
+    getMyScheduleBySemester: Array<ClassGroupResponse>;
     getProfiles: Array<Profile>;
     getProfilesById: Profile;
-    getSchedule: Array<Enrollment>;
-    getScheduleBySemester: Array<Enrollment>;
-    getSubjectbyCareer: Array<Subject>;
-    getSubjectbyCode: Array<Subject>;
-    getSubjectbyName: Array<Subject>;
+    getSubjectByCareer: Array<SubjectResponse>;
+    getSubjectByCode: SubjectResponse;
+    getSubjectById: SubjectResponse;
+    getSubjectByName: SubjectResponse;
+    getSubjects: Array<SubjectResponse>;
     myAccount: User;
     ping: Scalars['String'];
     pingAuth: Scalars['String'];
@@ -224,20 +294,12 @@ export type QueryGetCareerByIdArgs = {
     careerId: Scalars['Float'];
 };
 
-export type QueryGetCareerbyNameArgs = {
-    name: Scalars['String'];
-};
-
 export type QueryGetDataArgs = {
     msName: Scalars['String'];
 };
 
 export type QueryGetDepartmentByIdArgs = {
     departmentId: Scalars['Float'];
-};
-
-export type QueryGetDepartmentbyNameArgs = {
-    name: Scalars['String'];
 };
 
 export type QueryGetEnrollmentByIdArgs = {
@@ -252,10 +314,6 @@ export type QueryGetEnrollmentsByFiltersArgs = {
 
 export type QueryGetFacultyByIdArgs = {
     facultyId: Scalars['Float'];
-};
-
-export type QueryGetFacultybyNameArgs = {
-    name: Scalars['String'];
 };
 
 export type QueryGetGradeArgs = {
@@ -280,39 +338,59 @@ export type QueryGetGroupByIdArgs = {
     classGroupId: Scalars['String'];
 };
 
+export type QueryGetMyScheduleBySemesterArgs = {
+    semester: Scalars['String'];
+};
+
 export type QueryGetProfilesByIdArgs = {
     user_id: Scalars['String'];
 };
 
-export type QueryGetScheduleArgs = {
-    userId: Scalars['String'];
+export type QueryGetSubjectByCareerArgs = {
+    careerId: Scalars['Float'];
 };
 
-export type QueryGetScheduleBySemesterArgs = {
-    semester: Scalars['String'];
-    userId: Scalars['String'];
+export type QueryGetSubjectByCodeArgs = {
+    subjectCode: Scalars['String'];
 };
 
-export type QueryGetSubjectbyCareerArgs = {
-    career: Scalars['Float'];
+export type QueryGetSubjectByIdArgs = {
+    subjectId: Scalars['Float'];
 };
 
-export type QueryGetSubjectbyCodeArgs = {
-    code: Scalars['String'];
+export type QueryGetSubjectByNameArgs = {
+    subjectName: Scalars['String'];
 };
 
-export type QueryGetSubjectbyNameArgs = {
-    name: Scalars['String'];
+export type Schedule = {
+    __typename?: 'Schedule';
+    building: Scalars['Float'];
+    classroom: Scalars['Float'];
+    day: Scalars['Float'];
+    endTime: Scalars['String'];
+    scheduleId: Scalars['Float'];
+    startTime: Scalars['String'];
 };
 
 export type Subject = {
     __typename?: 'Subject';
-    career: Scalars['Float'];
-    code: Scalars['String'];
+    careerId: Scalars['Float'];
     credits: Scalars['Float'];
     curriculum?: Maybe<Scalars['String']>;
-    name: Scalars['String'];
-    subject_id: Scalars['Float'];
+    subjectCode: Scalars['String'];
+    subjectId: Scalars['Float'];
+    subjectName: Scalars['String'];
+};
+
+export type SubjectResponse = {
+    __typename?: 'SubjectResponse';
+    careerId: Scalars['Float'];
+    credits: Scalars['Float'];
+    curriculum?: Maybe<Scalars['String']>;
+    groups: Array<ClassGroup>;
+    subjectCode: Scalars['String'];
+    subjectId: Scalars['Float'];
+    subjectName: Scalars['String'];
 };
 
 export type User = {

@@ -1,52 +1,92 @@
 import * as Types from './types';
 
+import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import { gql } from 'apollo-angular';
-export type GetScheduleQueryVariables = Types.Exact<{
-    userId: Types.Scalars['String'];
-}>;
+export type GetMyScheduleQueryVariables = Types.Exact<{ [key: string]: never }>;
 
-export type GetScheduleQuery = {
+export type GetMyScheduleQuery = {
     __typename?: 'Query';
-    getSchedule: Array<{
-        __typename?: 'Enrollment';
-        id: string;
-        user: string;
-        group: string;
-        subject: string;
-        semester: string;
-        finalGrade?: number | null;
+    getMySchedule: Array<{
+        __typename?: 'ClassGroupResponse';
+        groupId: string;
+        maxCapacity: number;
+        teacherId: string;
+        subject: {
+            __typename?: 'Subject';
+            subjectId: number;
+            subjectName: string;
+            subjectCode: string;
+            careerId: number;
+            curriculum?: string | null;
+            credits: number;
+        };
+        schedules: Array<{
+            __typename?: 'Schedule';
+            scheduleId: number;
+            day: number;
+            startTime: string;
+            endTime: string;
+            classroom: number;
+            building: number;
+        }>;
     }>;
 };
 
-export type GetScheduleBySemesterQueryVariables = Types.Exact<{
+export type GetMyScheduleBySemesterQueryVariables = Types.Exact<{
     semester: Types.Scalars['String'];
-    userId: Types.Scalars['String'];
 }>;
 
-export type GetScheduleBySemesterQuery = {
+export type GetMyScheduleBySemesterQuery = {
     __typename?: 'Query';
-    getScheduleBySemester: Array<{
-        __typename?: 'Enrollment';
-        id: string;
-        user: string;
-        group: string;
-        subject: string;
-        semester: string;
-        finalGrade?: number | null;
+    getMyScheduleBySemester: Array<{
+        __typename?: 'ClassGroupResponse';
+        groupId: string;
+        maxCapacity: number;
+        teacherId: string;
+        subject: {
+            __typename?: 'Subject';
+            subjectId: number;
+            subjectName: string;
+            subjectCode: string;
+            careerId: number;
+            curriculum?: string | null;
+            credits: number;
+        };
+        schedules: Array<{
+            __typename?: 'Schedule';
+            scheduleId: number;
+            day: number;
+            startTime: string;
+            endTime: string;
+            classroom: number;
+            building: number;
+        }>;
     }>;
 };
 
-export const GetScheduleDocument = gql`
-    query GetSchedule($userId: String!) {
-        getSchedule(userId: $userId) {
-            id
-            user
-            group
-            subject
-            semester
-            finalGrade
+export const GetMyScheduleDocument = gql`
+    query GetMySchedule {
+        getMySchedule {
+            groupId
+            maxCapacity
+            teacherId
+            subject {
+                subjectId
+                subjectName
+                subjectCode
+                careerId
+                curriculum
+                credits
+            }
+            schedules {
+                scheduleId
+                day
+                startTime
+                endTime
+                classroom
+                building
+            }
         }
     }
 `;
@@ -54,25 +94,38 @@ export const GetScheduleDocument = gql`
 @Injectable({
     providedIn: 'root',
 })
-export class GetScheduleGQL extends Apollo.Query<
-    GetScheduleQuery,
-    GetScheduleQueryVariables
+export class GetMyScheduleGQL extends Apollo.Query<
+    GetMyScheduleQuery,
+    GetMyScheduleQueryVariables
 > {
-    override document = GetScheduleDocument;
+    override document = GetMyScheduleDocument;
 
     constructor(apollo: Apollo.Apollo) {
         super(apollo);
     }
 }
-export const GetScheduleBySemesterDocument = gql`
-    query GetScheduleBySemester($semester: String!, $userId: String!) {
-        getScheduleBySemester(semester: $semester, userId: $userId) {
-            id
-            user
-            group
-            subject
-            semester
-            finalGrade
+export const GetMyScheduleBySemesterDocument = gql`
+    query GetMyScheduleBySemester($semester: String!) {
+        getMyScheduleBySemester(semester: $semester) {
+            groupId
+            maxCapacity
+            teacherId
+            subject {
+                subjectId
+                subjectName
+                subjectCode
+                careerId
+                curriculum
+                credits
+            }
+            schedules {
+                scheduleId
+                day
+                startTime
+                endTime
+                classroom
+                building
+            }
         }
     }
 `;
@@ -80,11 +133,11 @@ export const GetScheduleBySemesterDocument = gql`
 @Injectable({
     providedIn: 'root',
 })
-export class GetScheduleBySemesterGQL extends Apollo.Query<
-    GetScheduleBySemesterQuery,
-    GetScheduleBySemesterQueryVariables
+export class GetMyScheduleBySemesterGQL extends Apollo.Query<
+    GetMyScheduleBySemesterQuery,
+    GetMyScheduleBySemesterQueryVariables
 > {
-    override document = GetScheduleBySemesterDocument;
+    override document = GetMyScheduleBySemesterDocument;
 
     constructor(apollo: Apollo.Apollo) {
         super(apollo);

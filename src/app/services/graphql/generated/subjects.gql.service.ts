@@ -1,68 +1,252 @@
 import * as Types from './types';
 
+import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import { gql } from 'apollo-angular';
-export type GetSubjectbyNameQueryVariables = Types.Exact<{
-    name: Types.Scalars['String'];
-}>;
+export type GetSubjectsQueryVariables = Types.Exact<{ [key: string]: never }>;
 
-export type GetSubjectbyNameQuery = {
+export type GetSubjectsQuery = {
     __typename?: 'Query';
-    getSubjectbyName: Array<{
-        __typename?: 'Subject';
-        subject_id: number;
-        name: string;
+    getSubjects: Array<{
+        __typename?: 'SubjectResponse';
+        subjectId: number;
+        subjectName: string;
+        subjectCode: string;
+        careerId: number;
         curriculum?: string | null;
         credits: number;
-        code: string;
-        career: number;
+        groups: Array<{
+            __typename?: 'ClassGroup';
+            groupId: string;
+            maxCapacity: number;
+            teacherId: string;
+            schedules: Array<{
+                __typename?: 'Schedule';
+                scheduleId: number;
+                day: number;
+                startTime: string;
+                endTime: string;
+                classroom: number;
+                building: number;
+            }>;
+        }>;
     }>;
 };
 
-export type GetSubjectbyCodeQueryVariables = Types.Exact<{
-    code: Types.Scalars['String'];
+export type GetSubjectByNameQueryVariables = Types.Exact<{
+    subjectName: Types.Scalars['String'];
 }>;
 
-export type GetSubjectbyCodeQuery = {
+export type GetSubjectByNameQuery = {
     __typename?: 'Query';
-    getSubjectbyCode: Array<{
-        __typename?: 'Subject';
-        subject_id: number;
-        name: string;
+    getSubjectByName: {
+        __typename?: 'SubjectResponse';
+        subjectId: number;
+        subjectName: string;
+        subjectCode: string;
+        careerId: number;
         curriculum?: string | null;
         credits: number;
-        code: string;
-        career: number;
+        groups: Array<{
+            __typename?: 'ClassGroup';
+            groupId: string;
+            maxCapacity: number;
+            teacherId: string;
+            schedules: Array<{
+                __typename?: 'Schedule';
+                scheduleId: number;
+                day: number;
+                startTime: string;
+                endTime: string;
+                classroom: number;
+                building: number;
+            }>;
+        }>;
+    };
+};
+
+export type GetSubjectByCodeQueryVariables = Types.Exact<{
+    subjectCode: Types.Scalars['String'];
+}>;
+
+export type GetSubjectByCodeQuery = {
+    __typename?: 'Query';
+    getSubjectByCode: {
+        __typename?: 'SubjectResponse';
+        subjectId: number;
+        subjectName: string;
+        subjectCode: string;
+        careerId: number;
+        curriculum?: string | null;
+        credits: number;
+        groups: Array<{
+            __typename?: 'ClassGroup';
+            groupId: string;
+            maxCapacity: number;
+            teacherId: string;
+            schedules: Array<{
+                __typename?: 'Schedule';
+                scheduleId: number;
+                day: number;
+                startTime: string;
+                endTime: string;
+                classroom: number;
+                building: number;
+            }>;
+        }>;
+    };
+};
+
+export type GetSubjectByCareerQueryVariables = Types.Exact<{
+    careerId: Types.Scalars['Float'];
+}>;
+
+export type GetSubjectByCareerQuery = {
+    __typename?: 'Query';
+    getSubjectByCareer: Array<{
+        __typename?: 'SubjectResponse';
+        subjectId: number;
+        subjectName: string;
+        subjectCode: string;
+        careerId: number;
+        curriculum?: string | null;
+        credits: number;
+        groups: Array<{
+            __typename?: 'ClassGroup';
+            groupId: string;
+            maxCapacity: number;
+            teacherId: string;
+            schedules: Array<{
+                __typename?: 'Schedule';
+                scheduleId: number;
+                day: number;
+                startTime: string;
+                endTime: string;
+                classroom: number;
+                building: number;
+            }>;
+        }>;
     }>;
 };
 
-export type GetSubjectbyCareerQueryVariables = Types.Exact<{
-    career: Types.Scalars['Float'];
+export type GetSubjectByIdQueryVariables = Types.Exact<{
+    subjectId: Types.Scalars['Float'];
 }>;
 
-export type GetSubjectbyCareerQuery = {
+export type GetSubjectByIdQuery = {
     __typename?: 'Query';
-    getSubjectbyCareer: Array<{
-        __typename?: 'Subject';
-        subject_id: number;
-        name: string;
+    getSubjectById: {
+        __typename?: 'SubjectResponse';
+        subjectId: number;
+        subjectName: string;
+        subjectCode: string;
+        careerId: number;
         curriculum?: string | null;
         credits: number;
-        code: string;
-        career: number;
+        groups: Array<{
+            __typename?: 'ClassGroup';
+            groupId: string;
+            maxCapacity: number;
+            teacherId: string;
+            schedules: Array<{
+                __typename?: 'Schedule';
+                scheduleId: number;
+                day: number;
+                startTime: string;
+                endTime: string;
+                classroom: number;
+                building: number;
+            }>;
+        }>;
+    };
+};
+
+export type GetClassGroupsQueryVariables = Types.Exact<{
+    [key: string]: never;
+}>;
+
+export type GetClassGroupsQuery = {
+    __typename?: 'Query';
+    getClassGroups: Array<{
+        __typename?: 'ClassGroupResponse';
+        groupId: string;
+        maxCapacity: number;
+        teacherId: string;
+        subject: {
+            __typename?: 'Subject';
+            subjectId: number;
+            subjectName: string;
+            subjectCode: string;
+            careerId: number;
+            curriculum?: string | null;
+            credits: number;
+        };
+        schedules: Array<{
+            __typename?: 'Schedule';
+            scheduleId: number;
+            day: number;
+            startTime: string;
+            endTime: string;
+            classroom: number;
+            building: number;
+        }>;
     }>;
 };
 
-export const GetSubjectbyNameDocument = gql`
-    query GetSubjectbyName($name: String!) {
-        getSubjectbyName(name: $name) {
-            subject_id
-            name
+export type GetGroupByIdQueryVariables = Types.Exact<{
+    classGroupId: Types.Scalars['String'];
+}>;
+
+export type GetGroupByIdQuery = {
+    __typename?: 'Query';
+    getGroupById: {
+        __typename?: 'ClassGroupResponse';
+        groupId: string;
+        maxCapacity: number;
+        teacherId: string;
+        subject: {
+            __typename?: 'Subject';
+            subjectId: number;
+            subjectName: string;
+            subjectCode: string;
+            careerId: number;
+            curriculum?: string | null;
+            credits: number;
+        };
+        schedules: Array<{
+            __typename?: 'Schedule';
+            scheduleId: number;
+            day: number;
+            startTime: string;
+            endTime: string;
+            classroom: number;
+            building: number;
+        }>;
+    };
+};
+
+export const GetSubjectsDocument = gql`
+    query GetSubjects {
+        getSubjects {
+            subjectId
+            subjectName
+            subjectCode
+            careerId
             curriculum
             credits
-            code
-            career
+            groups {
+                groupId
+                maxCapacity
+                teacherId
+                schedules {
+                    scheduleId
+                    day
+                    startTime
+                    endTime
+                    classroom
+                    building
+                }
+            }
         }
     }
 `;
@@ -70,25 +254,38 @@ export const GetSubjectbyNameDocument = gql`
 @Injectable({
     providedIn: 'root',
 })
-export class GetSubjectbyNameGQL extends Apollo.Query<
-    GetSubjectbyNameQuery,
-    GetSubjectbyNameQueryVariables
+export class GetSubjectsGQL extends Apollo.Query<
+    GetSubjectsQuery,
+    GetSubjectsQueryVariables
 > {
-    override document = GetSubjectbyNameDocument;
+    override document = GetSubjectsDocument;
 
     constructor(apollo: Apollo.Apollo) {
         super(apollo);
     }
 }
-export const GetSubjectbyCodeDocument = gql`
-    query GetSubjectbyCode($code: String!) {
-        getSubjectbyCode(code: $code) {
-            subject_id
-            name
+export const GetSubjectByNameDocument = gql`
+    query GetSubjectByName($subjectName: String!) {
+        getSubjectByName(subjectName: $subjectName) {
+            subjectId
+            subjectName
+            subjectCode
+            careerId
             curriculum
             credits
-            code
-            career
+            groups {
+                groupId
+                maxCapacity
+                teacherId
+                schedules {
+                    scheduleId
+                    day
+                    startTime
+                    endTime
+                    classroom
+                    building
+                }
+            }
         }
     }
 `;
@@ -96,25 +293,38 @@ export const GetSubjectbyCodeDocument = gql`
 @Injectable({
     providedIn: 'root',
 })
-export class GetSubjectbyCodeGQL extends Apollo.Query<
-    GetSubjectbyCodeQuery,
-    GetSubjectbyCodeQueryVariables
+export class GetSubjectByNameGQL extends Apollo.Query<
+    GetSubjectByNameQuery,
+    GetSubjectByNameQueryVariables
 > {
-    override document = GetSubjectbyCodeDocument;
+    override document = GetSubjectByNameDocument;
 
     constructor(apollo: Apollo.Apollo) {
         super(apollo);
     }
 }
-export const GetSubjectbyCareerDocument = gql`
-    query GetSubjectbyCareer($career: Float!) {
-        getSubjectbyCareer(career: $career) {
-            subject_id
-            name
+export const GetSubjectByCodeDocument = gql`
+    query GetSubjectByCode($subjectCode: String!) {
+        getSubjectByCode(subjectCode: $subjectCode) {
+            subjectId
+            subjectName
+            subjectCode
+            careerId
             curriculum
             credits
-            code
-            career
+            groups {
+                groupId
+                maxCapacity
+                teacherId
+                schedules {
+                    scheduleId
+                    day
+                    startTime
+                    endTime
+                    classroom
+                    building
+                }
+            }
         }
     }
 `;
@@ -122,11 +332,167 @@ export const GetSubjectbyCareerDocument = gql`
 @Injectable({
     providedIn: 'root',
 })
-export class GetSubjectbyCareerGQL extends Apollo.Query<
-    GetSubjectbyCareerQuery,
-    GetSubjectbyCareerQueryVariables
+export class GetSubjectByCodeGQL extends Apollo.Query<
+    GetSubjectByCodeQuery,
+    GetSubjectByCodeQueryVariables
 > {
-    override document = GetSubjectbyCareerDocument;
+    override document = GetSubjectByCodeDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
+export const GetSubjectByCareerDocument = gql`
+    query GetSubjectByCareer($careerId: Float!) {
+        getSubjectByCareer(careerId: $careerId) {
+            subjectId
+            subjectName
+            subjectCode
+            careerId
+            curriculum
+            credits
+            groups {
+                groupId
+                maxCapacity
+                teacherId
+                schedules {
+                    scheduleId
+                    day
+                    startTime
+                    endTime
+                    classroom
+                    building
+                }
+            }
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class GetSubjectByCareerGQL extends Apollo.Query<
+    GetSubjectByCareerQuery,
+    GetSubjectByCareerQueryVariables
+> {
+    override document = GetSubjectByCareerDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
+export const GetSubjectByIdDocument = gql`
+    query GetSubjectById($subjectId: Float!) {
+        getSubjectById(subjectId: $subjectId) {
+            subjectId
+            subjectName
+            subjectCode
+            careerId
+            curriculum
+            credits
+            groups {
+                groupId
+                maxCapacity
+                teacherId
+                schedules {
+                    scheduleId
+                    day
+                    startTime
+                    endTime
+                    classroom
+                    building
+                }
+            }
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class GetSubjectByIdGQL extends Apollo.Query<
+    GetSubjectByIdQuery,
+    GetSubjectByIdQueryVariables
+> {
+    override document = GetSubjectByIdDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
+export const GetClassGroupsDocument = gql`
+    query GetClassGroups {
+        getClassGroups {
+            groupId
+            maxCapacity
+            teacherId
+            subject {
+                subjectId
+                subjectName
+                subjectCode
+                careerId
+                curriculum
+                credits
+            }
+            schedules {
+                scheduleId
+                day
+                startTime
+                endTime
+                classroom
+                building
+            }
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class GetClassGroupsGQL extends Apollo.Query<
+    GetClassGroupsQuery,
+    GetClassGroupsQueryVariables
+> {
+    override document = GetClassGroupsDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
+export const GetGroupByIdDocument = gql`
+    query GetGroupById($classGroupId: String!) {
+        getGroupById(classGroupId: $classGroupId) {
+            groupId
+            maxCapacity
+            teacherId
+            subject {
+                subjectId
+                subjectName
+                subjectCode
+                careerId
+                curriculum
+                credits
+            }
+            schedules {
+                scheduleId
+                day
+                startTime
+                endTime
+                classroom
+                building
+            }
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class GetGroupByIdGQL extends Apollo.Query<
+    GetGroupByIdQuery,
+    GetGroupByIdQueryVariables
+> {
+    override document = GetGroupByIdDocument;
 
     constructor(apollo: Apollo.Apollo) {
         super(apollo);

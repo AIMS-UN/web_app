@@ -1,8 +1,8 @@
 import * as Types from './types';
 
+import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import { gql } from 'apollo-angular';
 export type PingQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type PingQuery = { __typename?: 'Query'; ping: string };
@@ -19,6 +19,18 @@ export type GetDataQuery = {
     __typename?: 'Query';
     getData: { __typename?: 'Data'; name: string; message?: string | null };
 };
+
+export type PingAuthQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type PingAuthQuery = { __typename?: 'Query'; pingAuth: string };
+
+export type PingStudentQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type PingStudentQuery = { __typename?: 'Query'; pingStudent: string };
+
+export type PingTeacherQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type PingTeacherQuery = { __typename?: 'Query'; pingTeacher: string };
 
 export const PingDocument = gql`
     query Ping {
@@ -69,6 +81,63 @@ export class GetDataGQL extends Apollo.Query<
     GetDataQueryVariables
 > {
     override document = GetDataDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
+export const PingAuthDocument = gql`
+    query PingAuth {
+        pingAuth
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class PingAuthGQL extends Apollo.Query<
+    PingAuthQuery,
+    PingAuthQueryVariables
+> {
+    override document = PingAuthDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
+export const PingStudentDocument = gql`
+    query PingStudent {
+        pingStudent
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class PingStudentGQL extends Apollo.Query<
+    PingStudentQuery,
+    PingStudentQueryVariables
+> {
+    override document = PingStudentDocument;
+
+    constructor(apollo: Apollo.Apollo) {
+        super(apollo);
+    }
+}
+export const PingTeacherDocument = gql`
+    query PingTeacher {
+        pingTeacher
+    }
+`;
+
+@Injectable({
+    providedIn: 'root',
+})
+export class PingTeacherGQL extends Apollo.Query<
+    PingTeacherQuery,
+    PingTeacherQueryVariables
+> {
+    override document = PingTeacherDocument;
 
     constructor(apollo: Apollo.Apollo) {
         super(apollo);
