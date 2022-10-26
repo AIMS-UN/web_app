@@ -46,7 +46,8 @@ table {
     background-color: white;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     border-width: 2px;
 }
