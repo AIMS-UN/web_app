@@ -13,13 +13,13 @@ import {
 })
 export class ProfilePageComponent implements OnInit {
     editable: boolean = false;
-    profile!: Observable<GetMyProfileQuery['getMyProfile']>;
+    profile$!: Observable<GetMyProfileQuery['getMyProfile']>;
 
     constructor(private profileGQL: GetMyProfileGQL) {}
 
     ngOnInit() {
         //TO-DO obtener datos en graphql
-        this.profile = this.profileGQL.watch().valueChanges.pipe(
+        this.profile$ = this.profileGQL.watch().valueChanges.pipe(
             map((result) => {
                 console.log(result.data);
                 return result.data.getMyProfile;

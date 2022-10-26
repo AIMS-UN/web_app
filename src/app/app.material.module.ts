@@ -13,36 +13,21 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-@NgModule({
-    imports: [
-        MatButtonModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatRadioModule,
-        MatSidenavModule,
-        MatDividerModule,
-        MatIconModule,
-        MatCardModule,
-        MatSelectModule,
-        MatExpansionModule,
-        MatDividerModule,
-        MatTableModule,
-    ],
-    exports: [
-        MatButtonModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatRadioModule,
-        MatSidenavModule,
-        MatDividerModule,
-        MatIconModule,
-        MatCardModule,
-        MatSelectModule,
-        MatExpansionModule,
-        MatDividerModule,
-        MatTableModule,
-    ],
-})
+const matModules = [
+    MatButtonModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSidenavModule,
+    MatDividerModule,
+    MatIconModule,
+    MatCardModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatTableModule,
+];
+
+@NgModule({ imports: matModules, exports: matModules })
 export class AppMaterialModule {}

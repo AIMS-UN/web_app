@@ -14,10 +14,10 @@ import {
     styleUrls: ['./dummy.component.css'],
 })
 export class DummyComponent implements OnInit {
-    data!: Observable<GetDataQuery['getData']['name']>;
+    data$!: Observable<GetDataQuery['getData']['name']>;
     dataJson!: string;
 
-    pingTeacher!: Observable<PingTeacherQuery['pingTeacher']>;
+    pingTeacher$!: Observable<PingTeacherQuery['pingTeacher']>;
 
     constructor(
         private dataGQL: GetDataGQL,
@@ -25,7 +25,7 @@ export class DummyComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.data = this.dataGQL
+        this.data$ = this.dataGQL
             .watch({ msName: 'enrollments' })
             .valueChanges.pipe(
                 map((result) => {
@@ -38,7 +38,7 @@ export class DummyComponent implements OnInit {
     }
 
     doPing() {
-        this.pingTeacher = this.teacherGQL.watch().valueChanges.pipe(
+        this.pingTeacher$ = this.teacherGQL.watch().valueChanges.pipe(
             map((result) => {
                 console.log(result.data);
                 return result.data.pingTeacher;
