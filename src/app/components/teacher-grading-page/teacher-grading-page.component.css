@@ -1,0 +1,46 @@
+.grid2x2 {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border: 2px solid darkgray;
+    padding: 5px;
+    margin-top: 20px !important;
+}
+.grid2x2 > div{
+    display: flex;
+    flex-basis: calc(50% - 10px);
+    flex-direction: column;
+}
+
+.grid2x2 > div:not(.low) {
+    justify-content: center;
+}
+
+.box {
+    margin: 5px;
+}
+
+.box h3,
+.box p {
+    margin: 0;
+}
+
+.box.right {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.gradeButton {
+    background-color: var(--primary);
+    color: white;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+.low {
+    justify-content: flex-end;
+}
+
+table {
+    width: 100%;
+  }
