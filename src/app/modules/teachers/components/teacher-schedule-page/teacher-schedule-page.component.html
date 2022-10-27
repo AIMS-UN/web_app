@@ -1,0 +1,148 @@
+<div class="container">
+    <h1>Horario</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div
+                    class="btn btn-primary"
+                    (click)="setView(CalendarView.Month)"
+                    [class.active]="view === CalendarView.Month"
+                >
+                    Mes
+                </div>
+                <div
+                    class="btn btn-primary"
+                    (click)="setView(CalendarView.Week)"
+                    [class.active]="view === CalendarView.Week"
+                >
+                    Semana
+                </div>
+                <div
+                    class="btn btn-primary"
+                    (click)="setView(CalendarView.Day)"
+                    [class.active]="view === CalendarView.Day"
+                >
+                    Listado
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">&nbsp;</div>
+        <div
+            *ngIf="view !== CalendarView.Day"
+            class="col-md-4"
+            style="text-align: right"
+        >
+            <div class="btn-group">
+                <div
+                    class="btn btn-primary"
+                    mwlCalendarPreviousView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                >
+                    Anterior
+                </div>
+                <div
+                    class="btn btn-outline-secondary"
+                    mwlCalendarToday
+                    [(viewDate)]="viewDate"
+                >
+                    Hoy
+                </div>
+                <div
+                    class="btn btn-primary"
+                    mwlCalendarNextView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                >
+                    Siguiente
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h2 class="monthTitle" *ngIf="view === CalendarView.Month">
+                {{ getMonth() }}
+            </h2>
+            <br />
+        </div>
+    </div>
+
+    <div [ngSwitch]="view">
+        <mwl-calendar-month-view
+            *ngSwitchCase="CalendarView.Month"
+            [viewDate]="viewDate"
+            [locale]="locale"
+        >
+        </mwl-calendar-month-view>
+
+        <mwl-calendar-week-view
+            *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [locale]="locale"
+        >
+        </mwl-calendar-week-view>
+
+        <div *ngSwitchCase="CalendarView.Day" class="row">
+            <div class="col-8">
+                <mat-card>
+                    <mat-card-title>Asignaturas impartidas</mat-card-title>
+                    <mat-card-content>
+                        <div class="grid2x2">
+                            <div class="box">
+                                <h3>Arquitectura de Software</h3>
+                            </div>
+                            <div class="box right">
+                                <p>7 AM - 9 AM</p>
+                            </div>
+                            <div class="box low">
+                                <p><i>Grupo 1</i></p>
+                            </div>
+                            <div class="box right">
+                                <button mat-raised-button class="studentButton">
+                                    Ver lista de estudiantes
+                                    <mat-icon>group</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="grid2x2">
+                            <div class="box">
+                                <h3>Arquitectura de Software</h3>
+                            </div>
+                            <div class="box right">
+                                <p>7 AM - 9 AM</p>
+                            </div>
+                            <div class="box low">
+                                <p><i>Grupo 1</i></p>
+                            </div>
+                            <div class="box right">
+                                <button mat-raised-button class="studentButton">
+                                    Ver lista de estudiantes
+                                    <mat-icon>group</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="grid2x2">
+                            <div class="box">
+                                <h3>Arquitectura de Software</h3>
+                            </div>
+                            <div class="box right">
+                                <p>7 AM - 9 AM</p>
+                            </div>
+                            <div class="box low">
+                                <p><i>Grupo 1</i></p>
+                            </div>
+                            <div class="box right">
+                                <button mat-raised-button class="studentButton">
+                                    Ver lista de estudiantes
+                                    <mat-icon>group</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

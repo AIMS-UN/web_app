@@ -6,6 +6,7 @@
     padding: 5px;
     margin-top: 20px !important;
 }
+
 .grid2x2 > div {
     display: flex;
     flex-basis: calc(50% - 10px);
