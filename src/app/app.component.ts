@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     title = 'aims_wa';
-    logged = true;
+    logged = false;
 }

@@ -10,3 +10,9 @@ mat-form-field {
 .logButtonMargin {
     margin-top: 30px;
 }
+
+@media screen and (max-width: 767px) {
+    .main {
+        height: 65vh;
+    }
+}

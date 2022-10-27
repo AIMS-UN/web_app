@@ -53,3 +53,74 @@ h3 {
 mat-card {
     margin: 10px 10px;
 }
+
+.sidebar {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--primary);
+    position: fixed;
+    width: inherit;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar img {
+    height: 200px;
+    width: auto;
+}
+
+.sidebar h1,
+.sidebar p {
+    color: white;
+    margin-top: 20px;
+}
+
+.sidebar h1 {
+    font-family: 'Montserrat';
+    font-weight: 800;
+    font-size: 26pt;
+}
+
+.sidebar p {
+    font-family: 'Nunito';
+    font-size: 16pt;
+    text-align: center;
+}
+
+.logBG {
+    background: url(../assets/Background.png);
+    background-size: cover;
+}
+
+@media screen and (max-width: 767px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        flex-direction: row;
+        justify-content: left;
+        height: 70px;
+        overflow: hidden;
+    }
+
+    .sidebar img {
+        height: 50px;
+        margin-right: 20px;
+    }
+
+    .sidebar h1 {
+        margin: 0;
+        font-size: 26pt;
+    }
+
+    .sidebar p {
+        visibility: hidden;
+    }
+
+    .logBG {
+        height: calc(100vh - 70px);
+    }
+}

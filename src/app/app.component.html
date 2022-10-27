@@ -23,10 +23,21 @@
             <a mat-flat-button href="/teacherGrading"> Calificaciones </a>
             <mat-divider></mat-divider>
         </mat-sidenav>
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
+        <mat-sidenav-content> </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
 
-<router-outlet *ngIf="!logged"></router-outlet>
+<div *ngIf="!logged">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="sidebar">
+                <img src="../assets/logoNegative.png" />
+                <h1>AIMS</h1>
+                <p>Academic information management system</p>
+            </div>
+        </div>
+        <div class="col logBG">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
