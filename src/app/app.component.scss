@@ -30,15 +30,33 @@ mat-sidenav {
     box-shadow: 5px 0px 5px var(--shadow);
 }
 
+mat-sidenav span {
+    margin-left: 10px;
+}
+
+mat-sidenav mat-icon {
+    background-color: var(--primaryDark);
+    color: white;
+    border-radius: 100px;
+    padding: 4px;
+    height: 32px;
+    width: 32px;
+}
+
 mat-sidenav-content {
     padding: 20px;
     background: url(../assets/Background.png);
     background-size: cover;
 }
 
-a {
+mat-sidenav a {
     display: block;
     text-align: left;
+    margin-bottom: 5px;
+}
+
+mat-sidenav h3 {
+    margin-bottom: 7px;
 }
 
 mat-divider {
