@@ -2,47 +2,184 @@
     <div class="row">
         <div class="col">
             <h1>Regístrate</h1>
-            <form
-                class="example-form"
-                (submit)="registerUser()"
-                appearance="legacy"
-            >
-                <mat-form-field class="example-full-width">
-                    <mat-label>Nombre de usuario</mat-label>
-                    <input matInput [(ngModel)]="username" name="username" />
-                </mat-form-field>
-                <br />
-                <mat-form-field class="example-full-width">
-                    <mat-label>Contraseña</mat-label>
-                    <input
-                        matInput
-                        type="password"
-                        [(ngModel)]="password"
-                        name="password"
-                    />
-                </mat-form-field>
+            <mat-stepper [linear]="true" #stepper>
+                <mat-step
+                    [stepControl]="firstFormGroup"
+                    label="Datos de usuario"
+                >
+                    <form [formGroup]="firstFormGroup">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Nombre de usuario</mat-label>
+                            <input
+                                matInput
+                                formControlName="nameCtrl"
+                                required
+                            />
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Contraseña</mat-label>
+                            <input
+                                matInput
+                                formControlName="passCtrl"
+                                type="password"
+                                required
+                            />
+                        </mat-form-field>
+                        <h3>Escoge tu rol</h3>
+                        <mat-radio-group
+                            class="roleSpacing"
+                            aria-label="Escoge tu rol"
+                            formControlName="roleCtrl"
+                            name="role"
+                        >
+                            <mat-radio-button value="student">
+                                Estudiante
+                            </mat-radio-button>
+                            <mat-radio-button value="teacher">
+                                Profesor
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <div>
+                            <button
+                                mat-raised-button
+                                matStepperNext
+                                color="primary"
+                                class="regButtonMargin"
+                            >
+                                Siguiente
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step
+                    [stepControl]="secondFormGroup"
+                    label="Datos personales"
+                >
+                    <form [formGroup]="secondFormGroup">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Nombres</mat-label>
+                            <input
+                                matInput
+                                formControlName="firstnameCtrl"
+                                required
+                            />
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Apellidos</mat-label>
+                            <input
+                                matInput
+                                formControlName="lastnameCtrl"
+                                required
+                            />
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Correo electrónico</mat-label>
+                            <input
+                                matInput
+                                type="email"
+                                formControlName="emailCtrl"
+                                required
+                            />
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Fecha de cumpleaños</mat-label>
+                            <input
+                                matInput
+                                [matDatepicker]="picker"
+                                required
+                                formControlName="dateCtrl"
+                            />
+                            <mat-hint>DD/MM/AAAA</mat-hint>
+                            <mat-datepicker-toggle
+                                matSuffix
+                                [for]="picker"
+                            ></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Número de teléfono</mat-label>
+                            <input
+                                matInput
+                                type="phone"
+                                formControlName="phoneCtrl"
+                            />
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Dirección de residencia</mat-label>
+                            <input matInput formControlName="addressCtrl" />
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Carrera</mat-label>
+                            <mat-select
+                                value=""
+                                required
+                                formControlName="careerCtrl"
+                            >
+                                <mat-option value="career1">
+                                    Carrera 1
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div>
+                            <button
+                                mat-raised-button
+                                matStepperPrevious
+                                color="primary"
+                                class="regButtonMargin"
+                            >
+                                Regresar
+                            </button>
 
-                <mat-radio-group
-                    class="roleSpacing"
-                    aria-label="Escoge tu rol"
-                    [(ngModel)]="role"
-                    name="role"
-                >
-                    <mat-radio-button value="student" checked="checked"
-                        >Estudiante</mat-radio-button
-                    >
-                    <mat-radio-button value="teacher"
-                        >Profesor</mat-radio-button
-                    >
-                </mat-radio-group>
-                <button
-                    mat-raised-button
-                    color="primary"
-                    class="regButtonMargin"
-                >
-                    Registrate
-                </button>
-            </form>
+                            <button
+                                mat-raised-button
+                                matStepperNext
+                                color="primary"
+                                class="regButtonMargin"
+                                style="margin-left: 20px"
+                            >
+                                Siguiente
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step label="Confirmación" [stepControl]="thirdFormGroup">
+                    <form [formGroup]="thirdFormGroup">
+                        <br />
+                        <mat-checkbox required formControlName="termsCtrl">
+                            Aceptas los términos y condiciones de uso de la
+                            aplicación.
+                        </mat-checkbox>
+
+                        <div>
+                            <button
+                                mat-raised-button
+                                matStepperPrevious
+                                color="primary"
+                                class="regButtonMargin"
+                            >
+                                Regresar
+                            </button>
+
+                            <button
+                                mat-raised-button
+                                color="primary"
+                                class="regButtonMargin"
+                                style="margin-left: 20px"
+                                (click)="registerUser()"
+                            >
+                                Registrar
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+            </mat-stepper>
             <br />
             <p>¿Ya tienes una cuenta? Accede desde <a href="/login">aquí</a></p>
         </div>
