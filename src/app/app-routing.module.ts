@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { HomeComponent } from './components/home-page/home.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './modules/auth/auth.guard';
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
     },
 
     { path: 'dummy', component: DummyComponent /*canActivate: [AuthGuard]*/ },
-    /*{ path: '**', redirectTo: 'dummy' }, //TODO: PageNotFoundComponent*/
+    { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
