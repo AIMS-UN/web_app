@@ -4,7 +4,7 @@
   "description": "# Web Application",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 --poll",
     "build": "ng build",
     "generate": "graphql-codegen",
     "watch": "ng build --watch --configuration development",
