@@ -8,5 +8,6 @@ import { RegisterPageComponent } from './components/register-page/registerPage.c
 @NgModule({
     declarations: [LoginPageComponent, RegisterPageComponent],
     imports: [SharedModule, AuthRoutingModule],
+    providers: [],
 })
 export class AuthModule {}

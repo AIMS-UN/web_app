@@ -7,13 +7,19 @@ import { AppComponent } from './app.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { HomeComponent } from './components/home-page/home.component';
 
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AcademicInfoModule } from './modules/academic-info/academic-info.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SubjectsModule } from './modules/subjects/subjects.module';
 import { TeachersModule } from './modules/teachers/teachers.module';
 
 @NgModule({
-    declarations: [AppComponent, DummyComponent, HomeComponent],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        DummyComponent,
+        DashboardComponent,
+    ],
     imports: [
         SharedModule,
         AuthModule,

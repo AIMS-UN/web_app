@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginGQL } from 'src/app/services/graphql/generated/accounts.gql.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-login-page',
@@ -10,29 +9,14 @@ import { LoginGQL } from 'src/app/services/graphql/generated/accounts.gql.servic
 export class LoginPageComponent implements OnInit {
     username: string = '';
     password: string = '';
-    logged: boolean = false;
 
-    constructor(private loginGQL: LoginGQL, private router: Router) {}
+    constructor(private auth: AuthService) {}
 
     ngOnInit() {
         return;
     }
 
     loginUser() {
-        this.loginGQL
-            .mutate({
-                username: this.username,
-                password: this.password,
-            })
-            .subscribe(({ data, loading }) => {
-                if (data) {
-                    this.logged = true;
-                    this.redirect();
-                }
-            });
-    }
-
-    redirect() {
-        this.router.navigate(['']);
+        this.auth.login(this.username, this.password);
     }
 }
