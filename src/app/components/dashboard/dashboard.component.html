@@ -21,7 +21,7 @@
     <mat-sidenav-container>
         <mat-sidenav mode="side" opened>
             <h3>Resumen</h3>
-            <a mat-flat-button href="#">
+            <a mat-flat-button routerLink="/dashboard">
                 <mat-icon>speed</mat-icon>
                 <span>Resumen </span>
             </a>
@@ -69,19 +69,4 @@
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>
-</div>
-
-<div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="sidebar">
-                <img src="../assets/logoNegative.png" />
-                <h1>AIMS</h1>
-                <p>Academic information management system</p>
-            </div>
-        </div>
-        <div class="col logBG">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
 </div>

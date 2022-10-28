@@ -45,7 +45,7 @@ mat-sidenav mat-icon {
 
 mat-sidenav-content {
     padding: 20px;
-    background: url(../assets/Background.png);
+    background: url(../../../assets/Background.png);
     background-size: cover;
 }
 
@@ -110,7 +110,7 @@ mat-card {
 }
 
 .logBG {
-    background: url(../assets/Background.png);
+    background: url(../../../assets/Background.png);
     background-size: cover;
 }
 

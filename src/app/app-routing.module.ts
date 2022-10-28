@@ -3,16 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { HomeComponent } from './components/home-page/home.component';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 const routes: Routes = [
-    { path: 'dummy', component: DummyComponent /*canActivate: [AuthGuard]*/ },
     {
         path: '',
         component: DashboardComponent,
-        children: [{ path: '', component: HomeComponent, pathMatch: 'full' }],
-        //canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'dashboard',
+                component: HomeComponent,
+                canActivate: [AuthGuard],
+            },
+        ],
     },
-    { path: '**', redirectTo: 'dummy' }, //TODO: PageNotFoundComponent
+
+    { path: 'dummy', component: DummyComponent /*canActivate: [AuthGuard]*/ },
+    /*{ path: '**', redirectTo: 'dummy' }, //TODO: PageNotFoundComponent*/
 ];
 
 @NgModule({

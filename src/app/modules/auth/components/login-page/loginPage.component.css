@@ -16,3 +16,153 @@ mat-form-field {
         height: 65vh;
     }
 }
+
+.toolbar {
+    background-color: var(--primary);
+    color: white;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    font-size: 26pt;
+    height: 70px;
+    box-shadow: 0px 5px 5px var(--shadow);
+    z-index: 5;
+}
+
+.logoIcon {
+    height: 50px;
+    margin-right: 20px;
+}
+
+mat-sidenav-container {
+    position: relative;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+}
+
+mat-sidenav {
+    padding: 10px 20px;
+    width: 20vw;
+    box-shadow: 5px 0px 5px var(--shadow);
+}
+
+mat-sidenav span {
+    margin-left: 10px;
+}
+
+mat-sidenav mat-icon {
+    background-color: var(--primaryDark);
+    color: white;
+    border-radius: 100px;
+    padding: 4px;
+    height: 32px;
+    width: 32px;
+}
+
+mat-sidenav-content {
+    padding: 20px;
+    background: url(../../../../../assets/Background.png);
+    background-size: cover;
+}
+
+mat-sidenav a {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+mat-sidenav h3 {
+    margin-bottom: 7px;
+}
+
+mat-divider {
+    margin: 10px;
+    border-top-color: darkgray;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+mat-card {
+    margin: 10px 10px;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--primary);
+    position: fixed;
+    width: inherit;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar img {
+    height: 200px;
+    width: auto;
+}
+
+.sidebar h1,
+.sidebar p {
+    color: white;
+    margin-top: 20px;
+}
+
+.sidebar h1 {
+    font-family: 'Montserrat';
+    font-weight: 800;
+    font-size: 26pt;
+}
+
+.sidebar p {
+    font-family: 'Nunito';
+    font-size: 16pt;
+    text-align: center;
+}
+
+.logBG {
+    background: url(../../../../../assets/Background.png);
+    background-size: cover;
+}
+
+@media screen and (max-width: 767px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        flex-direction: row;
+        justify-content: left;
+        height: 70px;
+        overflow: hidden;
+    }
+
+    .sidebar img {
+        height: 50px;
+        margin-right: 20px;
+    }
+
+    .sidebar h1 {
+        margin: 0;
+        font-size: 26pt;
+    }
+
+    .sidebar p {
+        visibility: hidden;
+    }
+
+    .logBG {
+        height: calc(100vh - 70px);
+    }
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+

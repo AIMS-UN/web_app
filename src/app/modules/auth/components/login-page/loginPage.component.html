@@ -1,49 +1,65 @@
-<div class="container main d-flex justify-content-center align-items-center">
-    <div class="row">
-        <div class="col">
-            <h1>Iniciar sesión</h1>
-            <form
-                class="example-form"
-                appearance="legacy"
-                (submit)="loginUser()"
-            >
-                <mat-form-field
-                    class="example-full-width"
-                    [hideRequiredMarker]="true"
-                >
-                    <mat-label>Nombre de usuario</mat-label>
-                    <input
-                        required
-                        matInput
-                        [(ngModel)]="username"
-                        name="username"
-                    />
-                </mat-form-field>
-                <br />
-                <mat-form-field
-                    class="example-full-width"
-                    [hideRequiredMarker]="true"
-                >
-                    <mat-label>Contraseña</mat-label>
-                    <input
-                        required
-                        matInput
-                        type="password"
-                        [(ngModel)]="password"
-                        name="password"
-                    />
-                </mat-form-field>
-                <br />
-                <button
-                    mat-raised-button
-                    color="primary"
-                    class="logButtonMargin"
-                >
-                    Iniciar Sesión
-                </button>
-            </form>
-            <br />
-            <p>¿No tienes una cuenta? Crea una <a href="/register">aquí</a></p>
+<div class="row">
+    <div class="col-md-3">
+        <div class="sidebar">
+            <img src="../assets/logoNegative.png" />
+            <h1>AIMS</h1>
+            <p>Academic information management system</p>
+        </div>
+    </div>
+    <div class="col logBG">
+        <div
+            class="container main d-flex justify-content-center align-items-center"
+        >
+            <div class="row">
+                <div class="col">
+                    <h1>Iniciar sesión</h1>
+                    <form
+                        class="example-form"
+                        appearance="legacy"
+                        (submit)="loginUser()"
+                    >
+                        <mat-form-field
+                            class="example-full-width"
+                            [hideRequiredMarker]="true"
+                        >
+                            <mat-label>Nombre de usuario</mat-label>
+                            <input
+                                required
+                                matInput
+                                [(ngModel)]="username"
+                                name="username"
+                            />
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field
+                            class="example-full-width"
+                            [hideRequiredMarker]="true"
+                        >
+                            <mat-label>Contraseña</mat-label>
+                            <input
+                                required
+                                matInput
+                                type="password"
+                                [(ngModel)]="password"
+                                name="password"
+                            />
+                        </mat-form-field>
+                        <br />
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="logButtonMargin"
+                        >
+                            Iniciar Sesión
+                        </button>
+                    </form>
+                    <br />
+                    <p>
+                        ¿No tienes una cuenta? Crea una
+                        <a href="/register">aquí</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
