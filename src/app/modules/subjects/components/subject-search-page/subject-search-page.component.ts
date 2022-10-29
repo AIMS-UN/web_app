@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {
+    GetSubjectByCodeGQL,
+    GetSubjectByCodeQuery,
+} from 'src/app/services/graphql/generated/subjects.gql.service';
 
 @Component({
     selector: 'app-subject-search-page',
@@ -7,10 +13,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubjectSearchPageComponent implements OnInit {
     searchState: string = '';
+    searchCode: string = '';
 
-    constructor() {}
+    subjects$!: Observable<GetSubjectByCodeQuery['getSubjectByCode']>;
+    subjects: any;
+
+    foundResult = false;
+
+    constructor(private subjectGQL: GetSubjectByCodeGQL) {}
 
     ngOnInit() {
         return;
+    }
+
+    getSubjectByCode() {
+        console.log(this.searchCode);
+
+        this.subjects$ = this.subjectGQL
+            .watch({ subjectCode: this.searchCode })
+            .valueChanges.pipe(
+                map((result) => {
+                    return result.data.getSubjectByCode;
+                })
+            );
+
+        this.subjects$.subscribe((result) => {
+            this.subjects = result;
+            this.foundResult = true;
+        });
     }
 }

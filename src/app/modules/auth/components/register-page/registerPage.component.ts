@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { RegisterGQL } from 'src/app/services/graphql/generated/accounts.gql.service';
+import { CreateProfileGQL } from 'src/app/services/graphql/generated/profile.gql.service';
+import * as Types from 'src/app/services/graphql/generated/types';
 
 @Component({
     selector: 'app-register-page',
@@ -38,6 +40,7 @@ export class RegisterPageComponent implements OnInit {
 
     constructor(
         private registerGQL: RegisterGQL,
+        private createProfileGQL: CreateProfileGQL,
         private _formBuilder: FormBuilder,
         private dateAdapter: DateAdapter<Date>
     ) {
@@ -46,6 +49,11 @@ export class RegisterPageComponent implements OnInit {
 
     ngOnInit() {
         return;
+    }
+
+    register() {
+        this.registerUser();
+        this.registerProfile();
     }
 
     registerUser() {
@@ -57,16 +65,46 @@ export class RegisterPageComponent implements OnInit {
         if (password == null) return;
         if (role == null || (role !== 'student' && role !== 'teacher')) return;
 
-        console.log(username, password, role);
-
         this.registerGQL
             .mutate({
-                username,
-                password,
-                role,
+                username: username,
+                password: password,
+                role: role,
             })
             .subscribe((result) => {
                 console.log(result);
             });
+    }
+
+    registerProfile() {
+        let firstnameCtrl = this.secondFormGroup.value.firstnameCtrl;
+        let lastnameCtrl = this.secondFormGroup.value.lastnameCtrl;
+        let emailCtrl = this.secondFormGroup.value.emailCtrl;
+        let dateCtrl = this.secondFormGroup.value.dateCtrl;
+        let phoneCtrl = this.secondFormGroup.value.phoneCtrl;
+        let addressCtrl = this.secondFormGroup.value.addressCtrl;
+        let careerCtrl = this.secondFormGroup.value.careerCtrl;
+
+        if (firstnameCtrl == null) return;
+        if (lastnameCtrl == null) return;
+        if (emailCtrl == null) return;
+        if (dateCtrl == null) return;
+        if (careerCtrl == null) return;
+        if (addressCtrl == null) return;
+        if (phoneCtrl == null) return;
+
+        let profileInput: Types.ProfileInput = {
+            address: addressCtrl,
+            birthdate: dateCtrl,
+            email: emailCtrl,
+            historials: [],
+            lastname: lastnameCtrl,
+            name: firstnameCtrl,
+            phone_number: phoneCtrl,
+        };
+
+        this.createProfileGQL.mutate({ profileInput }).subscribe((result) => {
+            console.log(result);
+        });
     }
 }

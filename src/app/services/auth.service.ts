@@ -32,7 +32,6 @@ export class AuthService {
     }
 
     autoLogin(): boolean {
-        console.log('autoLogin call');
         if (this.isLogged()) {
             return true;
         }

@@ -14,6 +14,7 @@ import {
 export class ProfilePageComponent implements OnInit {
     editable: boolean = false;
     profile$!: Observable<GetMyProfileQuery['getMyProfile']>;
+    profile: any;
 
     constructor(private profileGQL: GetMyProfileGQL) {}
 
@@ -21,10 +22,13 @@ export class ProfilePageComponent implements OnInit {
         //TO-DO obtener datos en graphql
         this.profile$ = this.profileGQL.watch().valueChanges.pipe(
             map((result) => {
-                console.log(result.data);
                 return result.data.getMyProfile;
             })
         );
+
+        this.profile$.subscribe((result) => {
+            this.profile = result;
+        });
     }
 
     toggleEdit(fields: HTMLInputElement[]): void {
