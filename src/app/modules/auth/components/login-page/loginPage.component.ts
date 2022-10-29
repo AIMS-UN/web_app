@@ -13,7 +13,7 @@ export class LoginPageComponent implements OnInit {
     constructor(private auth: AuthService) {}
 
     ngOnInit() {
-        return;
+        this.auth.autoLogin();
     }
 
     loginUser() {

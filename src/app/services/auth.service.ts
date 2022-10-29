@@ -7,7 +7,6 @@ import { LoginGQL } from './graphql/generated/accounts.gql.service';
     providedIn: 'root',
 })
 export class AuthService {
-    isLogged: boolean = false;
     redirectUrl: string = '';
     constructor(
         private loginGQL: LoginGQL,
@@ -22,18 +21,36 @@ export class AuthService {
                 password: password,
             })
             .subscribe(({ data, loading }) => {
-                console.log(data);
-                this.isLogged = true;
+                let now = new Date();
+                sessionStorage.setItem(
+                    'expiration',
+                    now.setHours(now.getHours() + 2).toString()
+                );
+                this.setRedirectUrl(this.redirectUrl);
                 this.router.navigate([this.redirectUrl]);
             });
     }
 
+    autoLogin(): boolean {
+        console.log('autoLogin call');
+        if (this.isLogged()) {
+            return true;
+        }
+        this.router.navigate(['/login']);
+        return false;
+    }
+
     logout() {
-        this.isLogged = false;
+        sessionStorage.removeItem('expiration');
         this.apollo.client.resetStore();
+        this.router.navigate(['/login']);
     }
 
     setRedirectUrl(url: string) {
-        this.redirectUrl = url;
+        this.redirectUrl = url === '' ? '/dashboard' : url;
+    }
+
+    isLogged(): boolean {
+        return sessionStorage.getItem('expiration') !== null;
     }
 }

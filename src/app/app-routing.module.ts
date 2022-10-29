@@ -19,12 +19,12 @@ const routes: Routes = [
         ],
     },
 
-    { path: 'dummy', component: DummyComponent /*canActivate: [AuthGuard]*/ },
+    { path: 'dummy', component: DummyComponent },
     { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes /* { enableTracing: true } */)],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
