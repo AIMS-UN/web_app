@@ -1,0 +1,27 @@
+.main {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Nunito';
+    font-size: 72pt;
+    margin: 100px 0;
+}
+
+h1.emoji {
+    color: #ffc83d;
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: black;
+}
+
+h3 {
+    font-family: 'Nunito';
+    font-size: 36pt;
+    margin: 30px;
+}

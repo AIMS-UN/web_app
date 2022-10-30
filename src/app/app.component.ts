@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     title = 'aims_wa';
+    logged = true;
+
+    logout() {
+        // Logout the cookie and redirect to login
+
+        this.logged = false;
+    }
 }

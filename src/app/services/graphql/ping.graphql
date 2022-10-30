@@ -1,0 +1,26 @@
+query Ping {
+  ping
+}
+
+query Pong {
+  pong
+}
+
+query GetData($msName: String!) {
+  getData(msName: $msName) {
+    name
+    message
+  }
+}
+
+query PingAuth {
+  pingAuth
+}
+
+query PingStudent {
+  pingStudent
+}
+
+query PingTeacher {
+  pingTeacher
+}

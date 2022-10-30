@@ -1,0 +1,47 @@
+query GetMySchedule {
+  getMySchedule {
+    groupId
+    maxCapacity
+    teacherId
+    subject {
+      subjectId
+      subjectName
+      subjectCode
+      careerId
+      curriculum
+      credits
+    }
+    schedules {
+      scheduleId
+      day
+      startTime
+      endTime
+      classroom
+      building
+    }
+  }
+}
+
+query GetMyScheduleBySemester($semester: String!) {
+  getMyScheduleBySemester(semester: $semester) {
+    groupId
+    maxCapacity
+    teacherId
+    subject {
+      subjectId
+      subjectName
+      subjectCode
+      careerId
+      curriculum
+      credits
+    }
+    schedules {
+      scheduleId
+      day
+      startTime
+      endTime
+      classroom
+      building
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<p>dummy works!</p>
+<h1>Account:</h1>
+<ul>
+    <li>{{ dataJson }}</li>
+    <li>{{ data$ | async }}</li>
+</ul>
+
+<p>Ping: {{ pingTeacher$ | async }}</p>
+<button (click)="doPing()">Click Me</button>

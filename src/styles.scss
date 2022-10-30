@@ -1,7 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap/scss/bootstrap-reboot';
 @import 'bootstrap/scss/bootstrap-grid';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;1,800&display=swap');
+
+$my-primary: mat.define-palette(mat.$blue-palette, 500);
+$my-accent: mat.define-palette(mat.$green-palette, 600, 700, 800);
+$my-warn: mat.define-palette(mat.$red-palette);
+$my-typography: mat.define-typography-config(
+    $font-family: 'Nunito',
+);
+
+$my-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $my-primary,
+            accent: $my-accent,
+            warn: $my-warn,
+        ),
+        typography: $my-typography,
+    )
+);
+
+@include mat.all-component-themes($my-theme);
+
+:root {
+    --primary: #3a85c7;
+    --primaryDark: #3f55bb;
+    --secundary: #206b2a;
+    --secundaryLight: #548f5d;
+    --warn: #8f0700;
+    --shadow: #00000029;
+}
 
 html,
 body {
@@ -9,5 +42,12 @@ body {
 }
 body {
     margin: 0;
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    font-family: Nunito, Roboto, sans-serif;
+    overflow-x: hidden;
+}
+
+h1 {
+    color: var(--primary);
+    font-family: Nunito, Roboto, sans-serif;
+    font-weight: 500 !important;
 }

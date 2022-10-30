@@ -1,0 +1,95 @@
+query GetCareers {
+  getCareers {
+    careerId
+    careerName
+    credits
+    department {
+      departmentId
+      departmentName
+      faculty {
+        facultyId
+        facultyName
+      }
+    }
+  }
+}
+
+query GetCareerById($careerId: Float!) {
+  getCareerById(careerId: $careerId) {
+    careerId
+    careerName
+    credits
+    department {
+      departmentId
+      departmentName
+      faculty {
+        facultyId
+        facultyName
+      }
+    }
+  }
+}
+
+query GetDepartments {
+  getDepartments {
+    departmentId
+    departmentName
+    faculty {
+      facultyId
+      facultyName
+    }
+    careers {
+      careerId
+      careerName
+      credits
+    }
+  }
+}
+
+query GetDepartmentById($departmentId: Float!) {
+  getDepartmentById(departmentId: $departmentId) {
+    departmentId
+    departmentName
+    faculty {
+      facultyId
+      facultyName
+    }
+    careers {
+      careerId
+      careerName
+      credits
+    }
+  }
+}
+
+query GetFaculties {
+  getFaculties {
+    facultyId
+    facultyName
+    departments {
+      departmentId
+      departmentName
+      careers {
+        careerId
+        careerName
+        credits
+      }
+    }
+  }
+}
+
+query GetFacultyById($facultyId: Float!) {
+  getFacultyById(facultyId: $facultyId) {
+    facultyId
+    facultyName
+    departments {
+      departmentId
+      departmentName
+      careers {
+        careerId
+        careerName
+        credits
+      }
+    }
+  }
+}

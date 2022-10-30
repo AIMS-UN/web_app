@@ -1,0 +1,66 @@
+mat-card {
+    margin: 10px 10px;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+mat-card.PGA {
+    padding: 15px;
+}
+
+.PGA p {
+    text-align: center;
+}
+
+.PGA mat-card-title p {
+    color: black;
+    font-size: 26pt;
+}
+
+mat-card-title {
+    color: var(--secundary);
+}
+
+mat-form-field {
+    width: -webkit-fill-available;
+    margin: 0 10px;
+}
+
+.subject mat-expansion-panel-header {
+    height: fit-content;
+    padding-top: 10px;
+    box-shadow: 0px 5px 5px var(--shadow);
+}
+
+.grade {
+    padding-top: 3px;
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    font-size: 14pt;
+    vertical-align: bottom;
+    border: 2px solid darkgray;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.titleGrading {
+    background-color: var(--secundary);
+}
+
+.titleGrading h4 {
+    margin: 5px 0;
+    color: white;
+}
+
+.grades {
+    background-color: var(--secundaryLight);
+}
+
+.grades p {
+    margin: 5px 0;
+    color: white;
+}

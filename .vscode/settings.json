@@ -17,5 +17,20 @@
         "editor.formatOnSave": true
     },
     "files.autoSave": "onFocusChange",
-    "standard.autoFixOnSave": true
+    "standard.autoFixOnSave": true,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3307,
+            "driver": "MySQL",
+            "name": "wa",
+            "database": "accounts",
+            "username": "aims",
+            "password": "aims"
+        }
+    ]
 }

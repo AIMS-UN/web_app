@@ -1,0 +1,61 @@
+query GetGradingCategories($subjectCode: String, $groupId: String) {
+  getGradingCategories(subject_code: $subjectCode, group_id: $groupId) {
+    id
+    name
+    weight
+    group_id
+    subject_code
+  }
+}
+
+query GetGradingCategory($id: String!) {
+  getGradingCategory(id: $id) {
+    id
+    name
+    weight
+    group_id
+    subject_code
+  }
+}
+
+query GetGrades($studentId: String, $categoryId: String) {
+  getGrades(student_id: $studentId, category_id: $categoryId) {
+    id
+    category_id
+    student_id
+    score
+  }
+}
+
+query GetGrade($id: String!) {
+  getGrade(id: $id) {
+    id
+    category_id
+    student_id
+    score
+  }
+}
+
+mutation CreateGradingCategory($categoryInput: CategoryInput!) {
+  createGradingCategory(categoryInput: $categoryInput)
+}
+
+mutation UpdateGradingCategory($categoryInput: CategoryInput!, $updateGradingCategoryId: String!) {
+  updateGradingCategory(categoryInput: $categoryInput, id: $updateGradingCategoryId)
+}
+
+mutation DeleteGradingCategory($deleteGradingCategoryId: String!) {
+  deleteGradingCategory(id: $deleteGradingCategoryId)
+}
+
+mutation CreateGrade($gradeInput: GradeInput!) {
+  createGrade(gradeInput: $gradeInput)
+}
+
+mutation UpdateGrade($gradeInput: GradeInput!, $updateGradeId: String!) {
+  updateGrade(gradeInput: $gradeInput, id: $updateGradeId)
+}
+
+mutation DeleteGrade($deleteGradeId: String!) {
+  deleteGrade(id: $deleteGradeId)
+}

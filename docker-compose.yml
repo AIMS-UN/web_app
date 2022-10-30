@@ -1,8 +1,14 @@
 version: "3.8"
 name: "aims"
+
 services:
-  aims_web_app:
-    build: .
-    image: aims_web_app
-    container_name: aims_web_app
-    
+  aims_angular:
+    build: "."
+
+    image: aims_angular
+    container_name: angular
+    ports:
+      - "4200:4200"
+    environment:
+      - NODE_ENV=development
+      - PORT=4200

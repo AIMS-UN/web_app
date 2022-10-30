@@ -1,21 +1,32 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from './app.shared.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AppMaterialModule } from './app.material.module';
-import { ExampleComponent } from './components/example/example.component';
-import { Example2Component } from './components/example2/example2.component';
+import { DummyComponent } from './components/dummy/dummy.component';
+import { HomeComponent } from './components/home-page/home.component';
+
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AcademicInfoModule } from './modules/academic-info/academic-info.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { SubjectsModule } from './modules/subjects/subjects.module';
+import { TeachersModule } from './modules/teachers/teachers.module';
 
 @NgModule({
-    declarations: [AppComponent, ExampleComponent, Example2Component],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        DummyComponent,
+        DashboardComponent,
+    ],
     imports: [
-        BrowserModule,
+        SharedModule,
+        AuthModule,
+        SubjectsModule,
+        TeachersModule,
+        AcademicInfoModule,
         AppRoutingModule,
-        BrowserAnimationsModule,
-        AppMaterialModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

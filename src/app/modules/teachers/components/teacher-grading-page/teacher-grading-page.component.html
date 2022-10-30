@@ -1,0 +1,208 @@
+<div class="container">
+    <h1>Calificaciones</h1>
+    <div class="row">
+        <div class="col-12">
+            <mat-card>
+                <mat-card-title>Asignaturas inscritas</mat-card-title>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="grid2x2">
+                                <div class="box">
+                                    <h3>Arquitectura de Software</h3>
+                                </div>
+                                <div class="box right">
+                                    <p>7 AM - 9 AM</p>
+                                </div>
+                                <div class="box low">
+                                    <p><i>Grupo 1</i></p>
+                                </div>
+                                <div class="box right">
+                                    <button
+                                        mat-raised-button
+                                        class="gradeButton"
+                                        (click)="getGrades()"
+                                    >
+                                        Calificar este grupo
+                                        <mat-icon>arrow_right_alt</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="grid2x2">
+                                <div class="box">
+                                    <h3>Arquitectura de Software</h3>
+                                </div>
+                                <div class="box right">
+                                    <p>7 AM - 9 AM</p>
+                                </div>
+                                <div class="box low">
+                                    <p><i>Grupo 1</i></p>
+                                </div>
+                                <div class="box right">
+                                    <button
+                                        mat-raised-button
+                                        class="gradeButton"
+                                    >
+                                        Calificar este grupo
+                                        <mat-icon>arrow_right_alt</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="grid2x2">
+                                <div class="box">
+                                    <h3>Arquitectura de Software</h3>
+                                </div>
+                                <div class="box right">
+                                    <p>7 AM - 9 AM</p>
+                                </div>
+                                <div class="box low">
+                                    <p><i>Grupo 1</i></p>
+                                </div>
+                                <div class="box right">
+                                    <button
+                                        mat-raised-button
+                                        class="gradeButton"
+                                    >
+                                        Calificar este grupo
+                                        <mat-icon>arrow_right_alt</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="scroll" *ngIf="found">
+        <table class="table table-bordered">
+            <tr>
+                <th>Estudiante</th>
+                <th>Parcial 1</th>
+                <th>Parcial 2</th>
+                <th>Parcial 3</th>
+                <th>Final</th>
+            </tr>
+            <tr>
+                <td>David Briceño</td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>4.0</td>
+            </tr>
+            <tr>
+                <td>David Briceño</td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>4.0</td>
+            </tr>
+            <tr>
+                <td>David Briceño</td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="grade">
+                        <input
+                            matInput
+                            type="number"
+                            min="0.0"
+                            max="5.0"
+                            step="0.1"
+                        />
+                    </mat-form-field>
+                </td>
+                <td>4.0</td>
+            </tr>
+        </table>
+    </div>
+</div>

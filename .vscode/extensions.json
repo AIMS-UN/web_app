@@ -4,6 +4,9 @@
     "angular.ng-template",
     "standard.vscode-standard",
     "usernamehw.errorlens",
-    "johnpapa.angular-essentials"
+    "johnpapa.angular-essentials",
+    "alexiv.vscode-angular2-files",
+    "jakethashi.vscode-angular2-emmet",
+    "vismalietuva.vscode-angular-support"
   ]
 }
