@@ -2,11 +2,11 @@ version: "3.8"
 name: "aims"
 
 services:
-  aims_angular:
+  web-app:
     build: "."
 
-    image: aims_angular
-    container_name: angular
+    image: aims_web_app
+    container_name: web_app
     ports:
       - "4200:4200"
     environment:
