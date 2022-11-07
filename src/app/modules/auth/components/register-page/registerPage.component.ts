@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
@@ -15,32 +15,9 @@ import { LoadingOverlayService } from 'src/app/services/loading.service';
     styleUrls: ['./registerPage.component.css'],
 })
 export class RegisterPageComponent implements OnInit {
-    firstFormGroup = this._formBuilder.group({
-        nameCtrl: ['', Validators.required],
-        passCtrl: ['', [Validators.required, Validators.minLength(5)]],
-        roleCtrl: ['student', Validators.required],
-    });
-
-    secondFormGroup = this._formBuilder.group({
-        firstnameCtrl: ['', Validators.required],
-        lastnameCtrl: ['', Validators.required],
-        emailCtrl: ['', [Validators.required, Validators.email]],
-        dateCtrl: ['', Validators.required],
-        phoneCtrl: [
-            '',
-            [
-                Validators.pattern('[0-9]*'),
-                Validators.maxLength(10),
-                Validators.minLength(10),
-            ],
-        ],
-        addressCtrl: [''],
-        careerCtrl: ['', Validators.required],
-    });
-
-    thirdFormGroup = this._formBuilder.group({
-        termsCtrl: ['', Validators.requiredTrue],
-    });
+    firstFormGroup!: FormGroup;
+    secondFormGroup!: FormGroup;
+    thirdFormGroup!: FormGroup;
 
     constructor(
         private registerGQL: RegisterGQL,
@@ -52,6 +29,33 @@ export class RegisterPageComponent implements OnInit {
         private _snackBar: MatSnackBar
     ) {
         this.dateAdapter.setLocale('en-GB');
+
+        this.firstFormGroup = this._formBuilder.group({
+            nameCtrl: ['', Validators.required],
+            passCtrl: ['', [Validators.required, Validators.minLength(5)]],
+            roleCtrl: ['student', Validators.required],
+        });
+
+        this.secondFormGroup = this._formBuilder.group({
+            firstnameCtrl: ['', Validators.required],
+            lastnameCtrl: ['', Validators.required],
+            emailCtrl: ['', [Validators.required, Validators.email]],
+            dateCtrl: ['', Validators.required],
+            phoneCtrl: [
+                '',
+                [
+                    Validators.pattern('[0-9]*'),
+                    Validators.maxLength(10),
+                    Validators.minLength(10),
+                ],
+            ],
+            addressCtrl: [''],
+            careerCtrl: ['', Validators.required],
+        });
+
+        this.thirdFormGroup = this._formBuilder.group({
+            termsCtrl: ['', Validators.requiredTrue],
+        });
     }
 
     ngOnInit() {

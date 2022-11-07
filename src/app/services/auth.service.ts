@@ -52,7 +52,7 @@ export class AuthService {
 
     logout() {
         sessionStorage.removeItem('expiration');
-        this.cookieService.delete('connected.sid');
+        this.cookieService.deleteAll();
         this.apollo.client.resetStore();
         this.router.navigate(['/login']);
     }

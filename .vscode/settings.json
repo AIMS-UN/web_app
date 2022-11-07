@@ -31,6 +31,19 @@
             "database": "accounts",
             "username": "aims",
             "password": "aims"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3308,
+            "driver": "MySQL",
+            "name": "college",
+            "database": "college",
+            "username": "aims",
+            "password": "aims"
         }
     ]
 }
