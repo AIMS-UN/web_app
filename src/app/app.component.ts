@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Globals } from './services/global.service';
 
 @Component({
     selector: 'app-root',
@@ -6,12 +7,5 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'aims_wa';
-    logged = true;
-
-    logout() {
-        // Logout the cookie and redirect to login
-
-        this.logged = false;
-    }
+    loading = Globals.loading;
 }
