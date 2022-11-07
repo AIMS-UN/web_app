@@ -1,6 +1,7 @@
 query GetProfiles {
   getProfiles {
     user_id
+    doc_id
     name
     lastname
     email
@@ -20,6 +21,7 @@ query GetProfiles {
 query GetProfilesById($userId: String!) {
   getProfilesById(user_id: $userId) {
     user_id
+    doc_id
     name
     lastname
     email
@@ -39,6 +41,7 @@ query GetProfilesById($userId: String!) {
 query GetMyProfile {
   getMyProfile {
     user_id
+    doc_id
     name
     lastname
     email

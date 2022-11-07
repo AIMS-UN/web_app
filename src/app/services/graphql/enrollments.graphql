@@ -1,5 +1,5 @@
-query GetEnrollmentsByFilters($semester: String, $group: String, $subject: String) {
-  getEnrollmentsByFilters(semester: $semester, group: $group, subject: $subject) {
+query GetEnrollmentsByFilters($semester: String, $groupId: String, $subjectId: Float) {
+  getEnrollmentsByFilters(semester: $semester, groupId: $groupId, subjectId: $subjectId) {
     id
     user
     group
@@ -9,8 +9,8 @@ query GetEnrollmentsByFilters($semester: String, $group: String, $subject: Strin
   }
 }
 
-query GetEnrollmentById($id: String!) {
-  getEnrollmentById(id: $id) {
+query GetEnrollmentById($enrollmentId: String!) {
+  getEnrollmentById(enrollmentId: $enrollmentId) {
     id
     user
     group
@@ -20,8 +20,8 @@ query GetEnrollmentById($id: String!) {
   }
 }
 
-mutation CreateEnrollment($semester: String!, $group: String!, $subject: String!) {
-  createEnrollment(semester: $semester, group: $group, subject: $subject) {
+mutation CreateEnrollment($semester: String!, $groupId: String!) {
+  createEnrollment(semester: $semester, groupId: $groupId) {
     id
     user
     group
@@ -31,8 +31,8 @@ mutation CreateEnrollment($semester: String!, $group: String!, $subject: String!
   }
 }
 
-mutation CancelEnrollment($semester: String!, $subject: String!) {
-  cancelEnrollment(semester: $semester, subject: $subject) {
+mutation CancelEnrollment($semester: String!, $subjectId: String!) {
+  cancelEnrollment(semester: $semester, subjectId: $subjectId) {
     id
     user
     group
@@ -41,5 +41,3 @@ mutation CancelEnrollment($semester: String!, $subject: String!) {
     finalGrade
   }
 }
-
-
