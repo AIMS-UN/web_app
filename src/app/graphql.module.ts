@@ -1,4 +1,4 @@
-import { HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import {
@@ -14,19 +14,6 @@ import { setContext } from '@apollo/client/link/context';
 const uri = 'http://localhost:3000/graphql';
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     const http = httpLink.create({ uri, withCredentials: true });
-
-    const auth = setContext((_, { headers }) => {
-        const token = localStorage.getItem('token');
-        console.log(token);
-        if (token === null) {
-            console.log('token null');
-            return {};
-        } else {
-            return {
-                headers: new HttpHeaders().set('token', `${token}`),
-            };
-        }
-    });
 
     const proto = setContext((operation, context) => {
         return {
