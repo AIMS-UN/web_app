@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RegisterGQL } from 'src/app/services/graphql/generated/accounts.gql.service';
 import { CreateProfileGQL } from 'src/app/services/graphql/generated/profile.gql.service';
 import * as Types from 'src/app/services/graphql/generated/types';
+import { SpinnerOverlayService } from 'src/app/services/loading.service';
 
 @Component({
     selector: 'app-register-page',
@@ -45,9 +46,10 @@ export class RegisterPageComponent implements OnInit {
         private createProfileGQL: CreateProfileGQL,
         private _formBuilder: FormBuilder,
         private dateAdapter: DateAdapter<Date>,
-        private authService: AuthService
+        private authService: AuthService,
+        private loading: SpinnerOverlayService
     ) {
-        this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
+        this.dateAdapter.setLocale('en-GB');
     }
 
     ngOnInit() {
@@ -55,14 +57,16 @@ export class RegisterPageComponent implements OnInit {
     }
 
     async register() {
+        this.loading.show();
         try {
             await this.registerUser();
             await this.registerProfile();
+            this.authService.setSession();
         } catch (err) {
             console.log(`ERROR: ${err}`);
+        } finally {
+            this.loading.hide();
         }
-
-        this.authService.setSession();
     }
 
     async registerUser() {
