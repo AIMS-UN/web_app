@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterGQL } from 'src/app/services/graphql/generated/accounts.gql.service';
@@ -47,13 +48,22 @@ export class RegisterPageComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private dateAdapter: DateAdapter<Date>,
         private authService: AuthService,
-        private loading: SpinnerOverlayService
+        private loading: SpinnerOverlayService,
+        private _snackBar: MatSnackBar
     ) {
         this.dateAdapter.setLocale('en-GB');
     }
 
     ngOnInit() {
         return;
+    }
+
+    openSnackBar(message: string) {
+        this._snackBar.open(message, undefined, {
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            duration: 2000,
+        });
     }
 
     async register() {
@@ -63,7 +73,7 @@ export class RegisterPageComponent implements OnInit {
             await this.registerProfile();
             this.authService.setSession();
         } catch (err) {
-            console.log(`ERROR: ${err}`);
+            this.openSnackBar(`ERROR: ${err}`);
         } finally {
             this.loading.hide();
         }
