@@ -37,6 +37,8 @@ export class LoginPageComponent implements OnInit {
     }
 
     async loginUser() {
+        if (this.firstFormGroup.invalid) return;
+
         this.loading.show();
         let value = this.firstFormGroup.value;
 

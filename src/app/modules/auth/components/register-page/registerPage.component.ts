@@ -28,7 +28,7 @@ export class RegisterPageComponent implements OnInit {
         private loading: LoadingOverlayService,
         private _snackBar: MatSnackBar
     ) {
-        this.dateAdapter.setLocale('en-GB');
+        this.dateAdapter.setLocale('fr-FR');
 
         this.firstFormGroup = this._formBuilder.group({
             nameCtrl: ['', Validators.required],
@@ -37,6 +37,7 @@ export class RegisterPageComponent implements OnInit {
         });
 
         this.secondFormGroup = this._formBuilder.group({
+            docCtrl: ['', [Validators.required, Validators.min(0)]],
             firstnameCtrl: ['', Validators.required],
             lastnameCtrl: ['', Validators.required],
             emailCtrl: ['', [Validators.required, Validators.email]],
@@ -105,6 +106,7 @@ export class RegisterPageComponent implements OnInit {
 
         let profileInput: Types.ProfileInput = {
             address: value.addressCtrl!,
+            doc_id: value.docCtrl!,
             birthdate: value.dateCtrl!,
             email: value.emailCtrl!,
             historials: [

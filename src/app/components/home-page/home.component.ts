@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
         private loading: LoadingOverlayService
     ) {
         this.profile = {
+            doc_id: 0,
             user_id: '',
             name: '',
             lastname: '',
