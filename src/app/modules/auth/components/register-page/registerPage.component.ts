@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { firstValueFrom } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { RegisterGQL } from 'src/app/services/graphql/generated/accounts.gql.service';
 import { CreateProfileGQL } from 'src/app/services/graphql/generated/profile.gql.service';
 import * as Types from 'src/app/services/graphql/generated/types';
@@ -42,7 +44,8 @@ export class RegisterPageComponent implements OnInit {
         private registerGQL: RegisterGQL,
         private createProfileGQL: CreateProfileGQL,
         private _formBuilder: FormBuilder,
-        private dateAdapter: DateAdapter<Date>
+        private dateAdapter: DateAdapter<Date>,
+        private authService: AuthService
     ) {
         this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
     }
@@ -51,60 +54,61 @@ export class RegisterPageComponent implements OnInit {
         return;
     }
 
-    register() {
-        this.registerUser();
-        this.registerProfile();
+    async register() {
+        try {
+            await this.registerUser();
+            await this.registerProfile();
+        } catch (err) {
+            console.log(`ERROR: ${err}`);
+        }
+
+        this.authService.setSession();
     }
 
-    registerUser() {
-        let username = this.firstFormGroup.value.nameCtrl;
-        let password = this.firstFormGroup.value.passCtrl;
-        let role = this.firstFormGroup.value.roleCtrl;
+    async registerUser() {
+        let value = this.firstFormGroup.value;
 
-        if (username == null) return;
-        if (password == null) return;
-        if (role == null || (role !== 'student' && role !== 'teacher')) return;
-
-        this.registerGQL
-            .mutate({
-                username: username,
-                password: password,
-                role: role,
-            })
-            .subscribe((result) => {
-                console.log(result);
-            });
+        try {
+            await firstValueFrom(
+                this.registerGQL.mutate({
+                    username: value.nameCtrl!,
+                    password: value.passCtrl!,
+                    role: value.roleCtrl!,
+                })
+            );
+        } catch (err) {
+            throw 'USER_REGISTER_PROCESS_ERROR';
+        }
     }
 
-    registerProfile() {
-        let firstnameCtrl = this.secondFormGroup.value.firstnameCtrl;
-        let lastnameCtrl = this.secondFormGroup.value.lastnameCtrl;
-        let emailCtrl = this.secondFormGroup.value.emailCtrl;
-        let dateCtrl = this.secondFormGroup.value.dateCtrl;
-        let phoneCtrl = this.secondFormGroup.value.phoneCtrl;
-        let addressCtrl = this.secondFormGroup.value.addressCtrl;
-        let careerCtrl = this.secondFormGroup.value.careerCtrl;
-
-        if (firstnameCtrl == null) return;
-        if (lastnameCtrl == null) return;
-        if (emailCtrl == null) return;
-        if (dateCtrl == null) return;
-        if (careerCtrl == null) return;
-        if (addressCtrl == null) return;
-        if (phoneCtrl == null) return;
+    async registerProfile() {
+        let value = this.secondFormGroup.value;
 
         let profileInput: Types.ProfileInput = {
-            address: addressCtrl,
-            birthdate: dateCtrl,
-            email: emailCtrl,
-            historials: [],
-            lastname: lastnameCtrl,
-            name: firstnameCtrl,
-            phone_number: phoneCtrl,
+            address: value.addressCtrl!,
+            birthdate: value.dateCtrl!,
+            email: value.emailCtrl!,
+            historials: [
+                {
+                    career: 1,
+                    coursed_credits: 0,
+                    approved_credits: 0,
+                    reprobed_credits: 0,
+                    GPA: 0,
+                },
+            ],
+            lastname: value.lastnameCtrl!,
+            name: value.firstnameCtrl!,
+            phone_number: value.phoneCtrl!,
         };
 
-        this.createProfileGQL.mutate({ profileInput }).subscribe((result) => {
+        try {
+            const result = await firstValueFrom(
+                this.createProfileGQL.mutate({ profileInput })
+            );
             console.log(result);
-        });
+        } catch (err) {
+            throw 'PROFILE_REGISTER_PROCESS_ERROR';
+        }
     }
 }
