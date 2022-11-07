@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RegisterGQL } from 'src/app/services/graphql/generated/accounts.gql.service';
 import { CreateProfileGQL } from 'src/app/services/graphql/generated/profile.gql.service';
 import * as Types from 'src/app/services/graphql/generated/types';
-import { SpinnerOverlayService } from 'src/app/services/loading.service';
+import { LoadingOverlayService } from 'src/app/services/loading.service';
 
 @Component({
     selector: 'app-register-page',
@@ -48,7 +48,7 @@ export class RegisterPageComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private dateAdapter: DateAdapter<Date>,
         private authService: AuthService,
-        private loading: SpinnerOverlayService,
+        private loading: LoadingOverlayService,
         private _snackBar: MatSnackBar
     ) {
         this.dateAdapter.setLocale('en-GB');
@@ -68,6 +68,7 @@ export class RegisterPageComponent implements OnInit {
 
     async register() {
         this.loading.show();
+
         try {
             await this.registerUser();
             await this.registerProfile();

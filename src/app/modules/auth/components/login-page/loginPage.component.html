@@ -13,11 +13,7 @@
             <div class="row">
                 <div class="col">
                     <h1>Iniciar sesión</h1>
-                    <form
-                        class="example-form"
-                        appearance="legacy"
-                        (submit)="loginUser()"
-                    >
+                    <form [formGroup]="firstFormGroup">
                         <mat-form-field
                             class="example-full-width"
                             [hideRequiredMarker]="true"
@@ -26,8 +22,7 @@
                             <input
                                 required
                                 matInput
-                                [(ngModel)]="username"
-                                name="username"
+                                formControlName="nameCtrl"
                             />
                         </mat-form-field>
                         <br />
@@ -40,8 +35,7 @@
                                 required
                                 matInput
                                 type="password"
-                                [(ngModel)]="password"
-                                name="password"
+                                formControlName="passCtrl"
                             />
                         </mat-form-field>
                         <br />
@@ -49,6 +43,7 @@
                             mat-raised-button
                             color="primary"
                             class="logButtonMargin"
+                            (click)="loginUser()"
                         >
                             Iniciar Sesión
                         </button>

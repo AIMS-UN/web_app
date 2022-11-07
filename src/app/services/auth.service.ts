@@ -36,8 +36,7 @@ export class AuthService {
                 })
             );
         } catch (err) {
-            console.log('LOGIN_FAILED');
-            return;
+            throw 'LOGIN ERROR';
         }
 
         this.setSession();

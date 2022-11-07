@@ -6,7 +6,7 @@ import { LoadingScreenComponent } from '../components/loading-screen/loading-scr
 @Injectable({
     providedIn: 'root',
 })
-export class SpinnerOverlayService {
+export class LoadingOverlayService {
     private overlayRef: OverlayRef;
 
     constructor(private overlay: Overlay) {
@@ -14,11 +14,11 @@ export class SpinnerOverlayService {
     }
 
     public show() {
-        const spinnerOverlayPortal = new ComponentPortal(
+        const loadingOverlayPortal = new ComponentPortal(
             LoadingScreenComponent
         );
 
-        this.overlayRef.attach(spinnerOverlayPortal);
+        this.overlayRef.attach(loadingOverlayPortal);
     }
 
     public hide() {
