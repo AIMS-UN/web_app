@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterGQL } from 'src/app/services/graphql/generated/accounts.gql.service';
 import { CreateProfileGQL } from 'src/app/services/graphql/generated/profile.gql.service';
 import * as Types from 'src/app/services/graphql/generated/types';
 import { LoadingOverlayService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
     selector: 'app-register-page',
@@ -26,7 +26,7 @@ export class RegisterPageComponent implements OnInit {
         private dateAdapter: DateAdapter<Date>,
         private authService: AuthService,
         private loading: LoadingOverlayService,
-        private _snackBar: MatSnackBar
+        private snackBar: SnackbarService
     ) {
         this.dateAdapter.setLocale('fr-FR');
 
@@ -63,14 +63,6 @@ export class RegisterPageComponent implements OnInit {
         return;
     }
 
-    openSnackBar(message: string) {
-        this._snackBar.open(message, undefined, {
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            duration: 2000,
-        });
-    }
-
     async register() {
         this.loading.show();
 
@@ -79,7 +71,7 @@ export class RegisterPageComponent implements OnInit {
             await this.registerProfile();
             this.authService.setSession();
         } catch (err) {
-            this.openSnackBar(`ERROR: ${err}`);
+            this.snackBar.openSnackBar(`ERROR: ${err}`);
         } finally {
             this.loading.hide();
         }

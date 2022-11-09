@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -10,6 +10,7 @@ import {
     UpdateProfileGQL,
 } from 'src/app/services/graphql/generated/profile.gql.service';
 import { LoadingOverlayService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
     selector: 'app-profile-page',
@@ -24,8 +25,8 @@ export class ProfilePageComponent implements OnInit {
     constructor(
         private profileGQL: GetMyProfileGQL,
         private updateProfileGQL: UpdateProfileGQL,
-        private _snackBar: MatSnackBar,
         private loading: LoadingOverlayService,
+        private snackbar: SnackbarService,
         private _formBuilder: FormBuilder
     ) {
         this.profile = {
@@ -68,20 +69,12 @@ export class ProfilePageComponent implements OnInit {
         this.firstFormGroup.disable();
     }
 
-    openSnackBar(message: string) {
-        this._snackBar.open(message, undefined, {
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            duration: 2000,
-        });
-    }
-
     async ngOnInit() {
         this.loading.show();
         try {
             await this.loadProfile();
         } catch (err) {
-            this.openSnackBar(`ERROR: ${err}`);
+            this.snackbar.openSnackBar(`ERROR: ${err}`);
         } finally {
             this.loading.hide();
         }
@@ -130,7 +123,7 @@ export class ProfilePageComponent implements OnInit {
         try {
             await this.updateProfile();
         } catch (err) {
-            this.openSnackBar(`ERROR: ${err}`);
+            this.snackbar.openSnackBar(`ERROR: ${err}`);
         } finally {
             this.loading.hide();
         }

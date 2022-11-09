@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -11,6 +10,7 @@ import {
     GetMyProfileQuery,
 } from 'src/app/services/graphql/generated/profile.gql.service';
 import { LoadingOverlayService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
     selector: 'app-home',
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     constructor(
         private profileGQL: GetMyProfileGQL,
         private careerGQL: GetCareerByIdGQL,
-        private _snackBar: MatSnackBar,
+        private snackBar: SnackbarService,
         private loading: LoadingOverlayService
     ) {
         this.profile = {
@@ -62,21 +62,13 @@ export class HomeComponent implements OnInit {
         };
     }
 
-    openSnackBar(message: string) {
-        this._snackBar.open(message, undefined, {
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            duration: 2000,
-        });
-    }
-
     async ngOnInit() {
         this.loading.show();
         try {
             await this.loadProfile();
             await this.loadCareer();
         } catch (err) {
-            this.openSnackBar(`ERROR: ${err}`);
+            this.snackBar.openSnackBar(`ERROR: ${err}`);
         } finally {
             this.loading.hide();
         }
