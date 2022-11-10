@@ -69,6 +69,18 @@
                         >
                             <form [formGroup]="secondFormGroup">
                                 <mat-form-field appearance="legacy">
+                                    <mat-label
+                                        >Documento de identidad</mat-label
+                                    >
+                                    <input
+                                        matInput
+                                        formControlName="docCtrl"
+                                        type="number"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <br />
+                                <mat-form-field appearance="legacy">
                                     <mat-label>Nombres</mat-label>
                                     <input
                                         matInput

@@ -1,88 +1,67 @@
 <div class="container">
     <h1>Datos personales</h1>
-    <button
-        mat-raised-button
-        class="editProfile"
-        #editButton
-        (click)="
-            toggleEdit([
-                usernameField,
-                idField,
-                emailField,
-                phoneField,
-                birthdayField,
-                addressField
-            ])
-        "
-    >
-        Editar
-    </button>
+
     <div class="row">
         <div class="col-8">
-            <mat-form-field>
-                <mat-label>Nombre de usuario</mat-label>
-                <input
-                    required
-                    matInput
-                    [disabled]="true"
-                    [(ngModel)]="profile.name"
-                    #usernameField
-                />
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Cédula</mat-label>
-                <input
-                    required
-                    matInput
-                    disabled
-                    #idField
-                    [(ngModel)]="profile.user_id"
-                />
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Correo electrónico</mat-label>
-                <input
-                    matInput
-                    type="email"
-                    [(ngModel)]="profile.email"
-                    disabled
-                    #emailField
-                />
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Número de teléfono</mat-label>
-                <input
-                    type="tel"
-                    matInput
-                    [(ngModel)]="profile.phone_number"
-                    disabled
-                    #phoneField
-                />
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Fecha de nacimiento</mat-label>
-                <input
-                    type="date"
-                    matInput
-                    disabled
-                    #birthdayField
-                    [(ngModel)]="profile.birthdate"
-                />
-            </mat-form-field>
-            <br />
-            <mat-form-field>
-                <mat-label>Dirección</mat-label>
-                <input
-                    matInput
-                    disabled
-                    #addressField
-                    [(ngModel)]="profile.address"
-                />
-            </mat-form-field>
+            <form [formGroup]="firstFormGroup">
+                <button
+                    mat-raised-button
+                    class="editProfile"
+                    (click)="toggleEdit()"
+                >
+                    {{ editable ? 'Guardar' : 'Editar' }}
+                </button>
+                <br />
+                <mat-form-field>
+                    <mat-label>Documento de identidad</mat-label>
+                    <input
+                        required
+                        matInput
+                        type="number"
+                        formControlName="docCtrl"
+                    />
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Nombres</mat-label>
+                    <input matInput required formControlName="nameCtrl" />
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput required formControlName="lastnameCtrl" />
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Correo electrónico</mat-label>
+                    <input
+                        matInput
+                        required
+                        type="email"
+                        formControlName="emailCtrl"
+                    />
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input
+                        type="date"
+                        matInput
+                        required
+                        formControlName="birthdayCtrl"
+                    />
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Número de teléfono</mat-label>
+                    <input type="tel" matInput formControlName="phoneCtrl" />
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Dirección</mat-label>
+                    <input matInput formControlName="addressCtrl" />
+                </mat-form-field>
+            </form>
         </div>
     </div>
 </div>

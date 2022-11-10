@@ -9,10 +9,10 @@ import { SchedulePageComponent } from './components/schedule-page/schedule-page.
 import { StudentGradingPageComponent } from './components/student-grading-page/student-grading-page.component';
 
 import { registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es';
+import localeFr from '@angular/common/locales/fr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-registerLocaleData(localeEs);
+registerLocaleData(localeFr);
 
 @NgModule({
     declarations: [

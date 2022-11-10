@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
 export type GetEnrollmentsByFiltersQueryVariables = Types.Exact<{
     semester?: Types.InputMaybe<Types.Scalars['String']>;
-    group?: Types.InputMaybe<Types.Scalars['String']>;
-    subject?: Types.InputMaybe<Types.Scalars['String']>;
+    groupId?: Types.InputMaybe<Types.Scalars['String']>;
+    subjectId?: Types.InputMaybe<Types.Scalars['Float']>;
 }>;
 
 export type GetEnrollmentsByFiltersQuery = {
@@ -23,7 +23,7 @@ export type GetEnrollmentsByFiltersQuery = {
 };
 
 export type GetEnrollmentByIdQueryVariables = Types.Exact<{
-    id: Types.Scalars['String'];
+    enrollmentId: Types.Scalars['String'];
 }>;
 
 export type GetEnrollmentByIdQuery = {
@@ -41,8 +41,7 @@ export type GetEnrollmentByIdQuery = {
 
 export type CreateEnrollmentMutationVariables = Types.Exact<{
     semester: Types.Scalars['String'];
-    group: Types.Scalars['String'];
-    subject: Types.Scalars['String'];
+    groupId: Types.Scalars['String'];
 }>;
 
 export type CreateEnrollmentMutation = {
@@ -60,7 +59,7 @@ export type CreateEnrollmentMutation = {
 
 export type CancelEnrollmentMutationVariables = Types.Exact<{
     semester: Types.Scalars['String'];
-    subject: Types.Scalars['String'];
+    subjectId: Types.Scalars['String'];
 }>;
 
 export type CancelEnrollmentMutation = {
@@ -79,13 +78,13 @@ export type CancelEnrollmentMutation = {
 export const GetEnrollmentsByFiltersDocument = gql`
     query GetEnrollmentsByFilters(
         $semester: String
-        $group: String
-        $subject: String
+        $groupId: String
+        $subjectId: Float
     ) {
         getEnrollmentsByFilters(
             semester: $semester
-            group: $group
-            subject: $subject
+            groupId: $groupId
+            subjectId: $subjectId
         ) {
             id
             user
@@ -111,8 +110,8 @@ export class GetEnrollmentsByFiltersGQL extends Apollo.Query<
     }
 }
 export const GetEnrollmentByIdDocument = gql`
-    query GetEnrollmentById($id: String!) {
-        getEnrollmentById(id: $id) {
+    query GetEnrollmentById($enrollmentId: String!) {
+        getEnrollmentById(enrollmentId: $enrollmentId) {
             id
             user
             group
@@ -137,16 +136,8 @@ export class GetEnrollmentByIdGQL extends Apollo.Query<
     }
 }
 export const CreateEnrollmentDocument = gql`
-    mutation CreateEnrollment(
-        $semester: String!
-        $group: String!
-        $subject: String!
-    ) {
-        createEnrollment(
-            semester: $semester
-            group: $group
-            subject: $subject
-        ) {
+    mutation CreateEnrollment($semester: String!, $groupId: String!) {
+        createEnrollment(semester: $semester, groupId: $groupId) {
             id
             user
             group
@@ -171,8 +162,8 @@ export class CreateEnrollmentGQL extends Apollo.Mutation<
     }
 }
 export const CancelEnrollmentDocument = gql`
-    mutation CancelEnrollment($semester: String!, $subject: String!) {
-        cancelEnrollment(semester: $semester, subject: $subject) {
+    mutation CancelEnrollment($semester: String!, $subjectId: String!) {
+        cancelEnrollment(semester: $semester, subjectId: $subjectId) {
             id
             user
             group

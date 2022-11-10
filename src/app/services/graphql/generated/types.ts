@@ -169,13 +169,12 @@ export type Mutation = {
 
 export type MutationCancelEnrollmentArgs = {
     semester: Scalars['String'];
-    subject: Scalars['String'];
+    subjectId: Scalars['String'];
 };
 
 export type MutationCreateEnrollmentArgs = {
-    group: Scalars['String'];
+    groupId: Scalars['String'];
     semester: Scalars['String'];
-    subject: Scalars['String'];
 };
 
 export type MutationCreateGradeArgs = {
@@ -237,6 +236,7 @@ export type Profile = {
     __typename?: 'Profile';
     address: Scalars['String'];
     birthdate: Scalars['String'];
+    doc_id: Scalars['Float'];
     email: Scalars['String'];
     historials: Array<Historials>;
     lastname: Scalars['String'];
@@ -248,6 +248,7 @@ export type Profile = {
 export type ProfileInput = {
     address: Scalars['String'];
     birthdate: Scalars['String'];
+    doc_id: Scalars['Float'];
     email: Scalars['String'];
     historials: Array<HistorialsInput>;
     lastname: Scalars['String'];
@@ -303,13 +304,13 @@ export type QueryGetDepartmentByIdArgs = {
 };
 
 export type QueryGetEnrollmentByIdArgs = {
-    id: Scalars['String'];
+    enrollmentId: Scalars['String'];
 };
 
 export type QueryGetEnrollmentsByFiltersArgs = {
-    group?: InputMaybe<Scalars['String']>;
+    groupId?: InputMaybe<Scalars['String']>;
     semester?: InputMaybe<Scalars['String']>;
-    subject?: InputMaybe<Scalars['String']>;
+    subjectId?: InputMaybe<Scalars['Float']>;
 };
 
 export type QueryGetFacultyByIdArgs = {

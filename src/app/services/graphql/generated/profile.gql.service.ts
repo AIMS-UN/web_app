@@ -10,6 +10,7 @@ export type GetProfilesQuery = {
     getProfiles: Array<{
         __typename?: 'Profile';
         user_id: string;
+        doc_id: number;
         name: string;
         lastname: string;
         email: string;
@@ -36,6 +37,7 @@ export type GetProfilesByIdQuery = {
     getProfilesById: {
         __typename?: 'Profile';
         user_id: string;
+        doc_id: number;
         name: string;
         lastname: string;
         email: string;
@@ -60,6 +62,7 @@ export type GetMyProfileQuery = {
     getMyProfile: {
         __typename?: 'Profile';
         user_id: string;
+        doc_id: number;
         name: string;
         lastname: string;
         email: string;
@@ -106,6 +109,7 @@ export const GetProfilesDocument = gql`
     query GetProfiles {
         getProfiles {
             user_id
+            doc_id
             name
             lastname
             email
@@ -140,6 +144,7 @@ export const GetProfilesByIdDocument = gql`
     query GetProfilesById($userId: String!) {
         getProfilesById(user_id: $userId) {
             user_id
+            doc_id
             name
             lastname
             email
@@ -174,6 +179,7 @@ export const GetMyProfileDocument = gql`
     query GetMyProfile {
         getMyProfile {
             user_id
+            doc_id
             name
             lastname
             email

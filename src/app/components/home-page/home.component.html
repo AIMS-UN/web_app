@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>¡Bienvenido de regreso, {{ username | async }}!</h1>
+    <h1>¡Bienvenido de regreso, {{ profile.name }} {{ profile.lastname }}!</h1>
     <div class="row">
         <div class="col-8">
             <mat-card>
@@ -53,13 +53,15 @@
         <div class="col-4">
             <mat-card>
                 <mat-card-title>Plan de estudios</mat-card-title>
-                <p style="text-align: center">Carrera</p>
+                <p style="text-align: center">
+                    {{ career.careerName }}
+                </p>
             </mat-card>
             <div class="row">
                 <div class="col">
                     <mat-card class="PGA">
                         <mat-card-title style="text-align: center">
-                            3.0
+                            {{ profile.historials[0].GPA.toFixed(1) }}
                         </mat-card-title>
                         <p style="text-align: center">Promedio académico</p>
                     </mat-card>
@@ -67,7 +69,7 @@
                 <div class="col">
                     <mat-card>
                         <mat-card-title style="text-align: center">
-                            0
+                            {{ profile.historials[0].coursed_credits }}
                         </mat-card-title>
                         <p style="text-align: center">Créditos inscritos</p>
                     </mat-card>

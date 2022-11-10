@@ -1,10 +1,16 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
     GetMyProfileGQL,
     GetMyProfileQuery,
+    UpdateProfileGQL,
 } from 'src/app/services/graphql/generated/profile.gql.service';
+import { LoadingOverlayService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
     selector: 'app-profile-page',
@@ -12,28 +18,148 @@ import {
     styleUrls: ['./profile-page.component.css'],
 })
 export class ProfilePageComponent implements OnInit {
+    firstFormGroup!: FormGroup;
     editable: boolean = false;
-    profile$!: Observable<GetMyProfileQuery['getMyProfile']>;
-    profile: any;
+    profile: GetMyProfileQuery['getMyProfile'];
 
-    constructor(private profileGQL: GetMyProfileGQL) {}
+    constructor(
+        private profileGQL: GetMyProfileGQL,
+        private updateProfileGQL: UpdateProfileGQL,
+        private loading: LoadingOverlayService,
+        private snackbar: SnackbarService,
+        private _formBuilder: FormBuilder
+    ) {
+        this.profile = {
+            user_id: '',
+            doc_id: 0,
+            name: '',
+            lastname: '',
+            email: '',
+            birthdate: '',
+            phone_number: '',
+            address: '',
+            historials: [
+                {
+                    career: 0,
+                    coursed_credits: 0,
+                    approved_credits: 0,
+                    reprobed_credits: 0,
+                    GPA: 0,
+                },
+            ],
+        };
 
-    ngOnInit() {
-        //TO-DO obtener datos en graphql
-        this.profile$ = this.profileGQL.watch().valueChanges.pipe(
-            map((result) => {
-                return result.data.getMyProfile;
-            })
-        );
+        this.firstFormGroup = this._formBuilder.group({
+            docCtrl: ['', [Validators.required, Validators.min(0)]],
+            nameCtrl: ['', Validators.required],
+            lastnameCtrl: ['', Validators.required],
+            emailCtrl: ['', [Validators.required, Validators.email]],
+            birthdayCtrl: ['', Validators.required],
+            phoneCtrl: [
+                '',
+                [
+                    Validators.pattern('[0-9]*'),
+                    Validators.maxLength(10),
+                    Validators.minLength(10),
+                ],
+            ],
+            addressCtrl: [''],
+        });
 
-        this.profile$.subscribe((result) => {
-            this.profile = result;
+        this.firstFormGroup.disable();
+    }
+
+    async ngOnInit() {
+        this.loading.show();
+        try {
+            await this.loadProfile();
+        } catch (err) {
+            this.snackbar.openSnackBar(`ERROR: ${err}`);
+        } finally {
+            this.loading.hide();
+        }
+
+        this.showFields();
+    }
+
+    async loadProfile() {
+        try {
+            this.profile = await firstValueFrom(
+                this.profileGQL.watch().valueChanges.pipe(
+                    map((result) => {
+                        return result.data.getMyProfile;
+                    })
+                )
+            );
+        } catch (err) {
+            throw 'PROFILE_NOT_LOADED';
+        }
+    }
+
+    showFields() {
+        let date = formatDate(this.profile.birthdate, 'yyyy-MM-dd', 'fr-FR');
+
+        this.firstFormGroup.setValue({
+            docCtrl: this.profile.doc_id,
+            nameCtrl: this.profile.name,
+            lastnameCtrl: this.profile.lastname,
+            emailCtrl: this.profile.email,
+            birthdayCtrl: date,
+            phoneCtrl: this.profile.phone_number,
+            addressCtrl: this.profile.address,
         });
     }
 
-    toggleEdit(fields: HTMLInputElement[]): void {
-        fields.forEach((field) => {
-            field.disabled = !field.disabled;
-        });
+    async toggleEdit() {
+        if (this.firstFormGroup.invalid) return;
+
+        this.editable = !this.editable;
+        if (this.editable) {
+            this.firstFormGroup.enable();
+            return;
+        }
+
+        this.loading.show();
+        try {
+            await this.updateProfile();
+        } catch (err) {
+            this.snackbar.openSnackBar(`ERROR: ${err}`);
+        } finally {
+            this.loading.hide();
+        }
+        this.firstFormGroup.disable();
+    }
+
+    async updateProfile() {
+        try {
+            let values = this.firstFormGroup.value;
+
+            let profileInput = {
+                doc_id: values.docCtrl,
+                name: values.nameCtrl,
+                lastname: values.lastnameCtrl,
+                email: values.emailCtrl,
+                birthdate: values.birthdayCtrl,
+                phone_number: values.phoneCtrl,
+                address: values.addressCtrl,
+                historials: [
+                    {
+                        career: 0,
+                        coursed_credits: 0,
+                        approved_credits: 0,
+                        reprobed_credits: 0,
+                        GPA: 0,
+                    },
+                ],
+            };
+
+            await firstValueFrom(
+                this.updateProfileGQL.mutate({ profileInput })
+            );
+
+            this.profile = { user_id: this.profile.user_id, ...profileInput };
+        } catch (err) {
+            throw 'PROFILE_NOT_UPDATED';
+        }
     }
 }

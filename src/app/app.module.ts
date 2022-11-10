@@ -13,12 +13,16 @@ import { AuthModule } from './modules/auth/auth.module';
 import { SubjectsModule } from './modules/subjects/subjects.module';
 import { TeachersModule } from './modules/teachers/teachers.module';
 
+import { CookieService } from 'ngx-cookie-service';
+import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
+
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         DummyComponent,
         DashboardComponent,
+        LoadingScreenComponent,
     ],
     imports: [
         SharedModule,
@@ -28,7 +32,7 @@ import { TeachersModule } from './modules/teachers/teachers.module';
         AcademicInfoModule,
         AppRoutingModule,
     ],
-    providers: [],
+    providers: [CookieService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
