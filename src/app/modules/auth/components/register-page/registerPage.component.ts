@@ -67,9 +67,13 @@ export class RegisterPageComponent implements OnInit {
         this.loading.show();
 
         try {
-            await this.registerUser();
+            const token = await this.registerUser();
+
+            this.authService.setSession(token);
+
             await this.registerProfile();
-            this.authService.setSession();
+
+            this.authService.redirect();
         } catch (err) {
             this.snackBar.openSnackBar(`ERROR: ${err}`);
         } finally {
@@ -81,13 +85,15 @@ export class RegisterPageComponent implements OnInit {
         let value = this.firstFormGroup.value;
 
         try {
-            await firstValueFrom(
+            const logUser = await firstValueFrom(
                 this.registerGQL.mutate({
                     username: value.nameCtrl!,
                     password: value.passCtrl!,
                     role: value.roleCtrl!,
                 })
             );
+
+            return logUser.data!.register.token;
         } catch (err) {
             throw 'USER_REGISTER_PROCESS_ERROR';
         }
@@ -116,10 +122,9 @@ export class RegisterPageComponent implements OnInit {
         };
 
         try {
-            const result = await firstValueFrom(
+            await firstValueFrom(
                 this.createProfileGQL.mutate({ profileInput })
             );
-            console.log(result);
         } catch (err) {
             throw 'PROFILE_REGISTER_PROCESS_ERROR';
         }

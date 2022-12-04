@@ -41,12 +41,16 @@ export type LoginMutationVariables = Types.Exact<{
 export type LoginMutation = {
     __typename?: 'Mutation';
     login: {
-        __typename?: 'User';
-        id: string;
-        username: string;
-        role: string;
-        updatedAt?: string | null;
-        createdAt?: string | null;
+        __typename?: 'Login';
+        token: string;
+        user: {
+            __typename?: 'User';
+            id: string;
+            username: string;
+            role: string;
+            updatedAt?: string | null;
+            createdAt?: string | null;
+        };
     };
 };
 
@@ -59,12 +63,16 @@ export type RegisterMutationVariables = Types.Exact<{
 export type RegisterMutation = {
     __typename?: 'Mutation';
     register: {
-        __typename?: 'User';
-        id: string;
-        username: string;
-        role: string;
-        updatedAt?: string | null;
-        createdAt?: string | null;
+        __typename?: 'Login';
+        token: string;
+        user: {
+            __typename?: 'User';
+            id: string;
+            username: string;
+            role: string;
+            updatedAt?: string | null;
+            createdAt?: string | null;
+        };
     };
 };
 
@@ -143,11 +151,14 @@ export class GetUserByIdGQL extends Apollo.Mutation<
 export const LoginDocument = gql`
     mutation Login($password: String!, $username: String!) {
         login(password: $password, username: $username) {
-            id
-            username
-            role
-            updatedAt
-            createdAt
+            token
+            user {
+                id
+                username
+                role
+                updatedAt
+                createdAt
+            }
         }
     }
 `;
@@ -168,11 +179,14 @@ export class LoginGQL extends Apollo.Mutation<
 export const RegisterDocument = gql`
     mutation Register($role: String!, $username: String!, $password: String!) {
         register(role: $role, username: $username, password: $password) {
-            id
-            username
-            role
-            updatedAt
-            createdAt
+            token
+            user {
+                id
+                username
+                role
+                updatedAt
+                createdAt
+            }
         }
     }
 `;

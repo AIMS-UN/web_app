@@ -147,6 +147,12 @@ export type HistorialsInput = {
     reprobed_credits: Scalars['Float'];
 };
 
+export type Login = {
+    __typename?: 'Login';
+    token: Scalars['String'];
+    user: User;
+};
+
 export type Mutation = {
     __typename?: 'Mutation';
     cancelEnrollment: Enrollment;
@@ -158,9 +164,9 @@ export type Mutation = {
     deleteGradingCategory: Scalars['String'];
     deleteProfile: Scalars['String'];
     getUserByID: User;
-    login: User;
+    login: Login;
     logout: Scalars['Boolean'];
-    register: User;
+    register: Login;
     updateGrade: Scalars['String'];
     updateGradingCategory: Scalars['String'];
     updateProfile: Scalars['String'];
