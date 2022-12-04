@@ -17,29 +17,34 @@ export class AuthService {
         private cookieService: CookieService
     ) {}
 
-    setSession() {
+    setSession(token: string) {
         let now = new Date();
+        sessionStorage.setItem('token', token);
         sessionStorage.setItem(
             'expiration',
             now.setHours(now.getHours() + 2).toString()
         );
+    }
+
+    redirect() {
         this.setRedirectUrl(this.redirectUrl);
         this.router.navigate([this.redirectUrl]);
     }
 
     async login(username: string, password: string) {
         try {
-            await firstValueFrom(
+            const logUser = await firstValueFrom(
                 this.loginGQL.mutate({
                     username: username,
                     password: password,
                 })
             );
+
+            this.setSession(logUser.data!.login.token);
+            this.redirect();
         } catch (err) {
             throw 'LOGIN ERROR';
         }
-
-        this.setSession();
     }
 
     autoLogin(): boolean {
@@ -51,8 +56,8 @@ export class AuthService {
     }
 
     logout() {
+        sessionStorage.removeItem('token');
         sessionStorage.removeItem('expiration');
-        this.cookieService.deleteAll();
         this.apollo.client.resetStore();
         this.router.navigate(['/login']);
     }
@@ -62,6 +67,6 @@ export class AuthService {
     }
 
     isLogged(): boolean {
-        return sessionStorage.getItem('expiration') !== null;
+        return sessionStorage.getItem('token') !== null;
     }
 }

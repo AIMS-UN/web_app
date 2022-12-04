@@ -19,6 +19,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
         return {
             headers: {
                 'x-forwarded-proto': 'https',
+                Authorization: sessionStorage.getItem('token') || '',
             },
         };
     });
