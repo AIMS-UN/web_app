@@ -22,7 +22,7 @@
     ]
   },
   "license": "GPL-3.0",
-  "homepage": "https://github.com/sarodriguezva/aims_web_app#readme",
+  "homepage": "https://github.com/AIMS-UN/web_app#readme",
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",
@@ -93,10 +93,10 @@
   "main": "commitlint.config.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sarodriguezva/aims_wa.git"
+    "url": "git+https://github.com/AIMS-UN/web_app.git"
   },
   "author": "AIMS",
   "bugs": {
-    "url": "https://github.com/sarodriguezva/aims_wa/issues"
+    "url": "https://github.com/AIMS-UN/web_app/issues"
   }
 }
